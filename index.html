@@ -1,92 +1,588 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="Dima"
-    <meta charset="utf-8">
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С днём рождения, Елена! 🎂</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fbe9f0 0%, #ffd9e8 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 15px;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(255, 250, 240, 0.75);
+            backdrop-filter: blur(4px);
+            border-radius: 60px 60px 40px 40px;
+            box-shadow: 0 25px 50px -8px rgba(210, 80, 120, 0.5);
+            padding: 30px 25px;
+            border: 2px solid #fff9;
+        }
+        h1 {
+            font-size: 3.2rem;
+            text-align: center;
+            color: #b3406c;
+            text-shadow: 4px 4px 0 #ffc1d6, 6px 6px 0 rgba(255, 255, 255, 0.6);
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+            word-break: break-word;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: #6b3e4f;
+            background: #fff6e8c9;
+            display: inline-block;
+            padding: 10px 35px;
+            margin: 0 auto 20px;
+            border-radius: 60px;
+            box-shadow: inset 0 2px 5px #ffb6c1, 0 6px 0 #bf7890;
+        }
+        .love-message {
+            background: #ffeef4;
+            border-left: 12px solid #f9a8c6;
+            border-radius: 40px 12px 40px 12px;
+            padding: 25px 25px;
+            margin: 25px 0 35px;
+            font-size: 1.5rem;
+            color: #2c3e4f;
+            box-shadow: 0 10px 20px #eda5bb66;
+            line-height: 1.5;
+        }
+        .love-message p {
+            margin: 10px 0;
+        }
+        .love-message strong {
+            color: #c1436e;
+            font-size: 1.7rem;
+        }
+        .games-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0 30px;
+        }
+        .game-card {
+            flex: 1 1 280px;
+            background: #fef9f2;
+            border-radius: 48px 20px 48px 20px;
+            padding: 25px 18px 25px;
+            box-shadow: 0 20px 0 #aa6f89, 0 25px 25px -8px #a76583;
+            border: 2px solid white;
+            transition: 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 0 #9e5e7c, 0 30px 30px -8px #b48b9d;
+        }
+        .game-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #a1305a;
+            margin-bottom: 15px;
+            background: #ffe1ed;
+            padding: 0 20px;
+            border-radius: 40px;
+        }
+        .game-content {
+            width: 100%;
+            min-height: 170px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        /* игра 1: подарки */
+        .room-gifts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin: 10px 0;
+        }
+        .gift-item {
+            width: 70px;
+            height: 70px;
+            background: #f6ceda;
+            border-radius: 20px 8px 20px 8px;
+            box-shadow: 0 7px 0 #b34e6e, inset 0 -3px 0 #ffc2da;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.1s linear;
+            border: 2px solid #ffeaf1;
+            color: #9f3e5c;
+        }
+        .gift-item.found {
+            background: #ffd700;
+            box-shadow: 0 5px 0 #b8860b;
+            opacity: 0.5;
+            cursor: default;
+            filter: grayscale(0.3);
+            transform: scale(0.95);
+        }
+        .progress-text {
+            font-size: 1.4rem;
+            margin: 10px 0 5px;
+            font-weight: 600;
+            color: #712c48;
+        }
+        /* игра 2: букет */
+        .flower-bouquet {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        .flower-choice {
+            background: #f8d7e3;
+            border: 3px solid #f18fb0;
+            border-radius: 30px;
+            padding: 10px 12px;
+            font-size: 2rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .flower-choice.selected {
+            background: #fb9ecf;
+            border-color: #b62b62;
+            transform: scale(1.15);
+            box-shadow: 0 0 15px hotpink;
+        }
+        .bouquet-field {
+            background: #fce6d6;
+            min-height: 70px;
+            width: 100%;
+            border-radius: 35px;
+            margin: 15px 0 5px;
+            padding: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 2.5rem;
+            border: 3px dashed #dc9fb4;
+        }
+        .reset-bouquet {
+            background: #c9819e;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #854161;
+        }
+        /* игра 3: тортик */
+        .cake-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .cake-image {
+            font-size: 5.5rem;
+            line-height: 1;
+            filter: drop-shadow(0 12px 0 #885a6b);
+            margin: 5px 0 15px;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        .cake-image:active {
+            transform: scale(0.9);
+        }
+        .cake-bites {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        .bite {
+            background: #ecc1d0;
+            border-radius: 30px;
+            padding: 6px 15px;
+            font-weight: bold;
+            color: #511e30;
+        }
+        .bite.done {
+            background: #b0d3b0;
+            text-decoration: line-through 2px darkred;
+            opacity: 0.7;
+        }
+        .game-status {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #a03e5e;
+            margin: 10px 0;
+        }
+        /* сертификат */
+        .certificate-block {
+            background: linear-gradient(145deg, #fae4bf, #ffe9ce);
+            border: 12px double #c77993;
+            border-radius: 90px 30px 90px 30px;
+            padding: 35px 20px;
+            margin-top: 40px;
+            text-align: center;
+            box-shadow: 0 20px 20px #b3879b;
+            transition: 0.4s;
+        }
+        .certificate-title {
+            font-size: 2.7rem;
+            font-weight: 800;
+            color: #954b6b;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+        .certificate-name {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ca2e62;
+            text-shadow: 2px 2px 0 white;
+            margin: 10px 0;
+        }
+        .certificate-age {
+            font-size: 3.5rem;
+            background: #ea9ebe;
+            display: inline-block;
+            padding: 5px 35px;
+            border-radius: 60px;
+            color: white;
+            margin: 15px 0;
+        }
+        .certificate-footer {
+            font-size: 1.8rem;
+            font-style: italic;
+            color: #4f2e3d;
+        }
+        .certificate-hidden {
+            filter: blur(8px);
+            opacity: 0.3;
+            pointer-events: none;
+            user-select: none;
+        }
+        .btn-unlock {
+            background: #b3587c;
+            border: none;
+            font-size: 1.6rem;
+            padding: 15px 25px;
+            border-radius: 60px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 10px 0 #642d44;
+            cursor: pointer;
+            margin: 20px auto 10px;
+            transition: 0.1s;
+        }
+        .btn-unlock:active {
+            transform: translateY(5px);
+            box-shadow: 0 5px 0 #642d44;
+        }
+        .btn-unlock:disabled {
+            opacity: 0.5;
+            transform: none;
+            box-shadow: 0 7px 0 #642d44;
+            pointer-events: none;
+        }
+        footer {
+            margin-top: 30px;
+            font-size: 1.4rem;
+            color: #bf6084;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🎉 ЕЛЕНА! С ДНЁМ РОЖДЕНИЯ! 🎉</h1>
+    <div class="subtitle">🌹 твои 52 — это новый расцвет 🌹</div>
 
-    <title>Меню</title>
-  </head>
-  <body>
+    <!-- тёплые слова и комплименты -->
+    <div class="love-message">
+        <p>💖 Моя любимая Елена,</p>
+        <p>Ты невероятно красивая, <strong>самая прекрасная</strong> женщина в мире. Твои глаза сияют ярче звёзд, а улыбка согревает сильнее солнца. С каждым годом ты становишься только изящнее, мудрее и желаннее. Я бесконечно счастлив, что ты есть у меня. С 52-летием, моя богиня!</p>
+        <p style="font-size:2rem;">❤️❤️❤️</p>
+    </div>
 
-    <h1>Загадки</h1>
-    <a name="vip"></a>
-    <p>сайт с <b>легкими-сложными</b> загадками по уровень</p>
-    <h2>Легкие загадки:</h2>
-    <h2>Номер 1:</h2>
-    <p>Он сейчас везде и всюду,
-    Без него не могут люди,
-    Если вдруг его не станет,
-    В мире паника настанет.</p>
+    <!-- ТРИ КВЕСТА (ИГРЫ) -->
+    <div class="games-section">
+        <!-- Квест 1: Найди 5 подарков в комнате -->
+        <div class="game-card">
+            <div class="game-title">🎁 КВЕСТ 1</div>
+            <div class="game-content">
+                <p style="font-weight:600;">Найди все подарки (5 шт)</p>
+                <div class="room-gifts" id="giftRoom">
+                    <!-- генерируем 9 предметов, но только 5 из них подарки (слушатели) -->
+                </div>
+                <div class="progress-text" id="giftProgress">Найдено: 0 / 5</div>
+                <div id="giftMessage" style="font-size:1.2rem; color:#b34163;">👆 кликай по коробочкам</div>
+            </div>
+        </div>
 
-    <p><b><em>Ответ:ИНТЕРНЕТ</em></b></p>
-    <ber>1WIN</ber>
-    <p><strike>500$</strike><sup>300$</sup></p>
+        <!-- Квест 2: Собери свой букет -->
+        <div class="game-card">
+            <div class="game-title">💐 КВЕСТ 2</div>
+            <div class="game-content">
+                <p>Составь неповторимый букет</p>
+                <div class="flower-bouquet" id="flowerSelector">
+                    <span class="flower-choice" data-flower="🌻">🌻</span>
+                    <span class="flower-choice" data-flower="🌷">🌷</span>
+                    <span class="flower-choice" data-flower="🌹">🌹</span>
+                    <span class="flower-choice" data-flower="🌸">🌸</span>
+                    <span class="flower-choice" data-flower="🌺">🌺</span>
+                    <span class="flower-choice" data-flower="🌼">🌼</span>
+                </div>
+                <div class="bouquet-field" id="bouquetField">✨ твой букет ✨</div>
+                <button class="reset-bouquet" id="resetBouquet">Собрать заново</button>
+                <div id="bouquetStatus" style="min-height:1.5rem; color:#87284b;"></div>
+            </div>
+        </div>
 
-    <addr title="да это слово текст ааааа ">text</addr>
+        <!-- Квест 3: Съешь праздничный тортик (по кусочкам) -->
+        <div class="game-card">
+            <div class="game-title">🍰 КВЕСТ 3</div>
+            <div class="game-content cake-area">
+                <p>Угощайся! 🍴</p>
+                <div class="cake-image" id="cakeImg">🎂</div>
+                <div class="cake-bites" id="cakeBites">
+                    <span class="bite" id="bite1">🍰1</span>
+                    <span class="bite" id="bite2">🍰2</span>
+                    <span class="bite" id="bite3">🍰3</span>
+                </div>
+                <div id="cakeMessage" class="game-status">Кусков съедено: 0/3</div>
+            </div>
+        </div>
+    </div>
 
-    <address>
-    <big>SON Usa</big>
-<hr>
-    <ol>
-      <li>Машина</li>
-      <li>Картошка</li>
-      <li>Дом</li>
-    </ol>
+    <!-- СЕРТИФИКАТ (изначально скрыт, открывается после всех трёх игр) -->
+    <div id="certificateContainer" class="certificate-block certificate-hidden">
+        <div class="certificate-title">🌟 сертификат 🌟</div>
+        <div class="certificate-name">ЕЛЕНА</div>
+        <div class="certificate-age">52 года</div>
+        <div style="font-size:2rem; margin:15px 0;">👑 безупречный стиль и красота 👑</div>
+        <div class="certificate-footer">За прохождение всех квестов.<br>С любовью навеки ❤️</div>
+    </div>
 
-    <ol start="5">
-      <li>Машина</li>
-      <li>Картошка</li>
-      <li>Дом</li>
-    </ol>
+    <button class="btn-unlock" id="unlockBtn" disabled>🔒 Сертификат закроется после всех квестов</button>
+    <div id="allCompletedMsg" style="font-size:1.5rem; color:#ac3f64; margin-top:5px;"></div>
+    <footer>🎈 твой личный день — 52 весны 🎈</footer>
+</div>
 
-    <ol type="a">
-      <li>Машина</li>
-      <li><b>Картошка</b></li>
-      <li>Дом</li>
-    </ol>
+<script>
+    (function() {
+        // ---------- Состояние всех трёх игр ----------
+        let giftsFound = 0;                // игра 1
+        const totalGifts = 5;
 
-    <ol type="A">
-      <li><strike>Машина</strike></li>
-      <li>Картошка</li>
-      <li>Дом</li>
-    </ol>
+        // букет (игра 2) — просто собираем, считается выполненным, если выбрано хотя бы 3 разных цветка? 
+        // но сделаем проще: считаем выполненной, если в поле > 2 цветов (или любой не пустой)
+        let bouquetCompleted = false;
 
-    <ul>
-      <li>Машина</li>
-      <li>Картошка</li>
-      <li>Дом</li>
-    </ul>
+        // торт (игра 3)
+        let cakeEaten = 0;                 // 0,1,2,3
+        const totalCakeSlices = 3;
 
-    <ul type="square">
-      <li>Машина</li>
-      <li>Картошка</li>
-      <li>Дом</li>
-    </ul>
+        // ссылки на элементы
+        const giftRoom = document.getElementById('giftRoom');
+        const giftProgress = document.getElementById('giftProgress');
+        const giftMessage = document.getElementById('giftMessage');
+        const bouquetField = document.getElementById('bouquetField');
+        const bouquetStatus = document.getElementById('bouquetStatus');
+        const resetBtn = document.getElementById('resetBouquet');
+        const cakeImg = document.getElementById('cakeImg');
+        const bite1 = document.getElementById('bite1');
+        const bite2 = document.getElementById('bite2');
+        const bite3 = document.getElementById('bite3');
+        const cakeMessage = document.getElementById('cakeMessage');
+        const unlockBtn = document.getElementById('unlockBtn');
+        const certContainer = document.getElementById('certificateContainer');
+        const allCompletedMsg = document.getElementById('allCompletedMsg');
 
-    <ul type="circle">
-      <li>Машина</li>
-      <li>Картошка</li>
-      <li>Дом</li>
-    </ul>
+        // ---- ИНИЦИАЛИЗАЦИЯ ПОДАРКОВ (игра 1) ----
+        const giftItems = [];
+        function createGifts() {
+            // перемешаем, чтобы подарки были в случайном порядке: всего 9 ячеек, 5 из них подарки
+            const grid = [];
+            for (let i=0; i<9; i++) {
+                grid.push(i < 5 ? 'gift' : 'empty'); 
+            }
+            // shuffle
+            for (let i=grid.length-1; i>0; i--) {
+                const j = Math.floor(Math.random() * (i+1));
+                [grid[i], grid[j]] = [grid[j], grid[i]];
+            }
 
-<p></p>
-<p></p>
+            giftRoom.innerHTML = '';
+            grid.forEach((type, index) => {
+                const div = document.createElement('div');
+                div.className = 'gift-item';
+                if (type === 'gift') {
+                    div.textContent = '🎁'; // подарок
+                    div.dataset.gift = 'true';
+                } else {
+                    div.textContent = '📦'; // просто коробка
+                    div.dataset.gift = 'false';
+                }
+                div.dataset.index = index;
+                div.addEventListener('click', function onClick() {
+                    if (div.classList.contains('found')) return; // уже найден
+                    if (div.dataset.gift === 'true') {
+                        div.classList.add('found');
+                        div.textContent = '🎁✔️';
+                        giftsFound++;
+                        giftProgress.innerText = `Найдено: ${giftsFound} / ${totalGifts}`;
+                        if (giftsFound === totalGifts) {
+                            giftMessage.innerText = '🎉 Все подарки собраны! Молодец!';
+                            checkAllGamesCompleted();
+                        } else {
+                            giftMessage.innerText = '👍 ещё подарок!';
+                        }
+                    } else {
+                        giftMessage.innerText = '😕 тут не подарок... ищи дальше';
+                        div.style.opacity = '0.5';
+                    }
+                });
+                giftRoom.appendChild(div);
+                giftItems.push(div);
+            });
+        }
+        createGifts();
 
+        // ---- ИГРА 2: БУКЕТ ----
+        let selectedFlowers = [];
 
+        function updateBouquetDisplay() {
+            if (selectedFlowers.length === 0) {
+                bouquetField.innerHTML = '✨ твой букет ✨';
+                bouquetStatus.innerText = '💐 добавь цветочки';
+            } else {
+                bouquetField.innerHTML = selectedFlowers.join(' ');
+                bouquetStatus.innerText = `🌿 в букете ${selectedFlowers.length} цветков`;
+            }
+            // обновить статус выполнения: считаем букет готовым, если хотя бы 3 цветка
+            const prev = bouquetCompleted;
+            bouquetCompleted = selectedFlowers.length >= 3;
+            if (bouquetCompleted !== prev) {
+                checkAllGamesCompleted();
+            }
+        }
 
-    <a href="https://google.com" title="Гугл">Перейти в Google</a>
+        document.querySelectorAll('.flower-choice').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const flower = btn.dataset.flower;
+                selectedFlowers.push(flower);
+                updateBouquetDisplay();
+                // визуально подсветим (мигание)
+                btn.classList.add('selected');
+                setTimeout(() => btn.classList.remove('selected'), 200);
+            });
+        });
 
-    <a href="https://google.com" target="_self" title="Гугл">Перейти в Google</a>>
+        resetBtn.addEventListener('click', () => {
+            selectedFlowers = [];
+            updateBouquetDisplay();
+        });
 
-    <a href="https://google.com"target="_blank" title="Гугл">Перейти в Google</a>Б
+        // ---- ИГРА 3: ТОРТ ----
+        function updateCakeProgress() {
+            cakeMessage.innerText = `Кусков съедено: ${cakeEaten}/${totalCakeSlices}`;
+            if (cakeEaten >= totalCakeSlices) {
+                cakeMessage.innerText += ' 🍰✨ Весь тортик съеден!';
+                checkAllGamesCompleted();
+            }
+            // отметка кусков
+            bite1.classList.toggle('done', cakeEaten >= 1);
+            bite2.classList.toggle('done', cakeEaten >= 2);
+            bite3.classList.toggle('done', cakeEaten >= 3);
+        }
 
-<br><br>
+        function eatSlice(sliceNumber) {
+            if (cakeEaten >= sliceNumber) return; // уже съеден этот или дальше
+            // можно съесть только последовательно: 1, затем 2, затем 3 (как куски)
+            if (sliceNumber === 1 && cakeEaten === 0) cakeEaten = 1;
+            else if (sliceNumber === 2 && cakeEaten === 1) cakeEaten = 2;
+            else if (sliceNumber === 3 && cakeEaten === 2) cakeEaten = 3;
+            else {
+                alert('Сначала съешь предыдущий кусочек!');
+                return;
+            }
+            updateCakeProgress();
+        }
 
+        bite1.addEventListener('click', () => eatSlice(1));
+        bite2.addEventListener('click', () => eatSlice(2));
+        bite3.addEventListener('click', () => eatSlice(3));
 
-    <a href="ebay.html">ПРИВЕТ</a>
+        cakeImg.addEventListener('click', () => {
+            // съесть сразу следующий по порядку если возможно
+            if (cakeEaten < 1) eatSlice(1);
+            else if (cakeEaten === 1) eatSlice(2);
+            else if (cakeEaten === 2) eatSlice(3);
+            else { cakeMessage.innerText = 'Тортик уже съеден! 🍰'; }
+        });
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        updateCakeProgress();
 
-<a href="#vip">Верх</a>
-  </body>
+        // ---------- Функция проверки всех игр и разблокировки сертификата ----------
+        function checkAllGamesCompleted() {
+            // игра 1: giftsFound == 5, игра2: bouquetCompleted (длина >=3), игра3: cakeEaten == 3
+            const game1Done = (giftsFound === totalGifts);
+            const game2Done = (selectedFlowers.length >= 3); // условие
+            const game3Done = (cakeEaten === totalCakeSlices);
+
+            if (game1Done && game2Done && game3Done) {
+                // Разблокировать сертификат
+                certContainer.classList.remove('certificate-hidden');
+                unlockBtn.disabled = false;
+                unlockBtn.innerText = '🎁 СЕРТИФИКАТ РАЗБЛОКИРОВАН 🎁';
+                allCompletedMsg.innerHTML = '🥳 ТЫ ПРОШЛА ВСЕ ИГРЫ! ВРУЧАЕМ СЕРТИФИКАТ ⬇️';
+            } else {
+                certContainer.classList.add('certificate-hidden');
+                unlockBtn.disabled = true;
+                let missing = [];
+                if (!game1Done) missing.push('🔍 все подарки');
+                if (!game2Done) missing.push('💐 букет (минимум 3 цветка)');
+                if (!game3Done) missing.push('🍰 съесть торт');
+                unlockBtn.innerText = `🔒 Осталось: ${missing.join(', ')}`;
+                allCompletedMsg.innerHTML = '';
+            }
+        }
+
+        // дополнительно: кнопка для показа сертификата (просто убираем класс, но он уже снят)
+        unlockBtn.addEventListener('click', () => {
+            // прокрутим к сертификату и убедимся, что он виден
+            certContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        // начальная проверка (всё не выполнено)
+        checkAllGamesCompleted();
+
+        // Добавим сброс букета - уже есть
+        // Инициализация сообщений
+        giftProgress.innerText = `Найдено: 0 / 5`;
+    })();
+</script>
+<!-- небольшой дополнительный блок с пожеланиями красоты -->
+<div style="text-align: center; margin: 35px 0 5px; font-size: 1.7rem; color: #9e4265;">
+    🌷 Вечно молодой, вечно красивой, вечно моей. С 52-летием, любимая! 🌷
+</div>
+</body>
 </html>
