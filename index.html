@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Цветы | ПК + телефон: максимально влево</title>
+    <title>Цветы | Букеты на заказ</title>
     <style>
-        /* Полный сброс — никаких отступов */
+        /* Полный сброс */
         * {
             margin: 0;
             padding: 0;
@@ -18,14 +18,20 @@
             padding: 0;
             background-color: #ffffff;
             width: 100%;
-            overflow-x: hidden;    /* скрываем вылезание только по горизонтали, чтобы не было полосы прокрутки */
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         body {
             min-height: 100vh;
+            font-family: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+            background: #ffffff;
         }
 
-        /* Главный контейнер — на всю ширину */
+        /* Подключаем красивый шрифт Playfair Display и элегантный для подзаголовка */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500&display=swap');
+
+        /* Главный контейнер */
         .main {
             width: 100%;
             max-width: 100%;
@@ -47,7 +53,7 @@
             overflow: visible;
         }
 
-        /* ----- ЦВЕТЫ1: СДВИГ ВЛЕВО НА ДВА ШАГА (ОТРИЦАТЕЛЬНЫЕ MARGIN) ДЛЯ ВСЕХ УСТРОЙСТВ ----- */
+        /* ----- ЦВЕТЫ1: сдвиг влево на два шага (ПК + телефон) ----- */
         .flower-left {
             flex: 1;
             text-align: left;
@@ -55,7 +61,6 @@
             padding: 0;
             line-height: 0;
             position: relative;
-            /* ПЕРВЫЙ ШАГ ВЛЕВО: отрицательный margin у родителя */
             margin-left: -20px;
         }
         .flower-left img {
@@ -65,11 +70,11 @@
             height: auto;
             margin: 0;
             padding: 0;
-            /* ВТОРОЙ ШАГ ВЛЕВО: отрицательный margin у самой картинки */
             margin-left: -18px;
             transform-origin: left center;
             transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             cursor: pointer;
+            will-change: transform;
         }
 
         /* ----- ЦВЕТЫ3: прижата вправо, уменьшена в 2 раза ----- */
@@ -90,9 +95,10 @@
             transform-origin: right center;
             transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             cursor: pointer;
+            will-change: transform;
         }
 
-        /* ----- ЦВЕТЫ4: уменьшена в 3 раза, по центру, вверху ----- */
+        /* ----- ЦВЕТЫ4: уменьшена в 3 раза, по центру ----- */
         .flower-center {
             text-align: center;
             margin: 0;
@@ -108,31 +114,106 @@
             transform-origin: center center;
             transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             cursor: pointer;
+            will-change: transform;
         }
 
-        /* ---------- ЭФФЕКТ ПРИ НАВЕДЕНИИ / КАСАНИИ ---------- */
+        /* ---------- ТЕКСТОВЫЙ БЛОК: "Цветы/Букеты" и "на заказ" ---------- */
+        .text-block {
+            text-align: center;
+            margin: 50px 20px 60px 20px;
+            padding: 20px 0;
+            background: transparent;
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', 'Georgia', serif;
+            font-size: 64px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #2d2d2a;
+            line-height: 1.2;
+            text-shadow: 2px 2px 12px rgba(0,0,0,0.02);
+            word-break: keep-all;
+        }
+
+        .main-title .slash {
+            font-weight: 400;
+            color: #b87c5a;
+            margin: 0 8px;
+        }
+
+        .subtitle {
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+            font-size: 28px;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            color: #8b6b4f;
+            margin-top: 16px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #b87c5a 0%, #d9a77a 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-block;
+            padding: 0 10px;
+        }
+
+        /* Декоративная линия для элегантности */
+        .text-block::before {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4b48c, transparent);
+            margin: 0 auto 25px auto;
+        }
+
+        /* Стили для дрожания при скролле (плавный тремор) */
+        @keyframes gentleShake {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            15% { transform: translate(-1.2px, 0.8px) rotate(0.3deg); }
+            30% { transform: translate(1.1px, -0.6px) rotate(-0.2deg); }
+            45% { transform: translate(-0.8px, 1px) rotate(0.2deg); }
+            60% { transform: translate(0.9px, -0.4px) rotate(-0.3deg); }
+            75% { transform: translate(-0.5px, 0.5px) rotate(0.1deg); }
+            90% { transform: translate(0.3px, -0.2px) rotate(-0.1deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+        }
+
+        /* Класс для дрожания — применяется при скролле */
+        .shake-on-scroll {
+            animation: gentleShake 0.45s ease-in-out forwards;
+        }
+
+        /* Для плавности добавляем transition к изображениям */
+        .flower-left img, .flower-right img, .flower-center img {
+            transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1), filter 0.2s;
+        }
+
+        /* Эффект наведения */
         @media (hover: hover) {
             .flower-left img:hover,
             .flower-right img:hover,
             .flower-center img:hover {
-                transform: scale(1.08);
+                transform: scale(1.05);
+                filter: brightness(0.98);
             }
         }
 
         .flower-left img:active,
         .flower-right img:active,
         .flower-center img:active {
-            transform: scale(1.07);
+            transform: scale(1.04);
             transition: transform 0.1s ease;
         }
 
-        /* ===== ДЛЯ ТЕЛЕФОНОВ: УСИЛИВАЕМ СДВИГ (тех же 2 шага, но побольше) ===== */
+        /* ===== АДАПТАЦИЯ ПОД ТЕЛЕФОНЫ И ПК (сдвиги и размеры) ===== */
         @media (max-width: 768px) {
             .flower-left {
-                margin-left: -28px;   /* первый шаг на телефонах больше */
+                margin-left: -28px;
             }
             .flower-left img {
-                margin-left: -22px;   /* второй шаг больше */
+                margin-left: -22px;
             }
             .flower-right img {
                 width: 52%;
@@ -141,9 +222,18 @@
             .flower-center {
                 margin-top: 18px;
             }
+            .main-title {
+                font-size: 44px;
+            }
+            .subtitle {
+                font-size: 22px;
+                letter-spacing: 0.1em;
+            }
+            .text-block {
+                margin: 40px 15px 50px 15px;
+            }
         }
 
-        /* Для очень маленьких телефонов (iPhone SE, 375px) — дополнительное смещение */
         @media (max-width: 480px) {
             .flower-left {
                 margin-left: -35px;
@@ -159,19 +249,24 @@
                 width: 40%;
                 max-width: 40%;
             }
+            .main-title {
+                font-size: 32px;
+            }
+            .subtitle {
+                font-size: 18px;
+                letter-spacing: 0.08em;
+            }
         }
 
-        /* ===== ДЛЯ ПК (ШИРОКИЕ ЭКРАНЫ) — ТОЖЕ СДВИГАЕМ НА ДВА ШАГА, НО УМЕРЕННО ===== */
         @media (min-width: 1024px) {
             .flower-left {
-                margin-left: -30px;   /* первый шаг на ПК */
+                margin-left: -30px;
             }
             .flower-left img {
-                margin-left: -20px;   /* второй шаг на ПК */
+                margin-left: -20px;
             }
         }
 
-        /* Для больших мониторов (чтоб не терялся эффект) */
         @media (min-width: 1440px) {
             .flower-left {
                 margin-left: -40px;
@@ -181,7 +276,6 @@
             }
         }
 
-        /* Убираем всё лишнее */
         img {
             border-radius: 0;
             box-shadow: none;
@@ -197,21 +291,109 @@
         .flower-left img {
             flex-shrink: 0;
         }
+
+        /* Убираем скролл-бар для красоты (но оставляем функционал) */
+        ::-webkit-scrollbar {
+            width: 5px;
+            background: #f5f0ea;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4b48c;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
 <div class="main">
+    <!-- Верхняя строка: цветы1 + цветы3 -->
     <div class="top-line">
         <div class="flower-left">
-            <img src="цветы1.png" alt="цветы1">
+            <img src="цветы1.png" alt="цветы1" class="flower-img" data-shake="true">
         </div>
         <div class="flower-right">
-            <img src="цветы3.png" alt="цветы3">
+            <img src="цветы3.png" alt="цветы3" class="flower-img" data-shake="true">
         </div>
     </div>
+
+    <!-- КРАСИВЫЙ ТЕКСТОВЫЙ БЛОК между фотками -->
+    <div class="text-block">
+        <div class="main-title">
+            Цветы<span class="slash">/</span>Букеты
+        </div>
+        <div class="subtitle">
+            на заказ
+        </div>
+    </div>
+
+    <!-- Фотка цветы4 (ниже текста) -->
     <div class="flower-center">
-        <img src="цветы4.png" alt="цветы4">
+        <img src="цветы4.png" alt="цветы4" class="flower-img" data-shake="true">
     </div>
 </div>
+
+<script>
+    (function() {
+        // Плавный тремор (дрожание) фоток при скролле
+        // Выбираем все изображения с классом flower-img (все три фото)
+        const images = document.querySelectorAll('.flower-img');
+        
+        // Флаг для предотвращения слишком частого срабатывания (throttle)
+        let ticking = false;
+        let lastScrollY = window.scrollY;
+        
+        // Функция добавления класса дрожания
+        function addShakeEffect() {
+            images.forEach(img => {
+                // Убираем класс, если он есть, чтобы перезапустить анимацию
+                img.classList.remove('shake-on-scroll');
+                // Принудительный reflow для перезапуска анимации
+                void img.offsetWidth;
+                img.classList.add('shake-on-scroll');
+                
+                // Убираем класс после окончания анимации, чтобы можно было снова добавить при след. скролле
+                setTimeout(() => {
+                    img.classList.remove('shake-on-scroll');
+                }, 500);
+            });
+        }
+        
+        // Обработчик скролла с throttle (requestAnimationFrame)
+        function onScrollHandler() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    const currentScrollY = window.scrollY;
+                    // Добавляем эффект только если скролл изменился (пользователь листает)
+                    if (currentScrollY !== lastScrollY) {
+                        addShakeEffect();
+                        lastScrollY = currentScrollY;
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        
+        // Добавляем эффект также при первом скролле + начальная инициализация для "первого касания"
+        window.addEventListener('scroll', onScrollHandler);
+        
+        // Плавное дрожание также при касании/листании на телефонах (touchmove)
+        let touchTimer = null;
+        window.addEventListener('touchmove', function() {
+            if (touchTimer) clearTimeout(touchTimer);
+            touchTimer = setTimeout(() => {
+                addShakeEffect();
+            }, 10);
+        });
+        
+        // Дополнительно: легкое дрожание при загрузке страницы (для эффекта)
+        setTimeout(() => {
+            addShakeEffect();
+        }, 200);
+        
+        // Чтобы эффект не был слишком назойливым, но плавным - анимация длится 0.45s
+        // При каждом листании фотки "трясутся" нежно и возвращаются в положение.
+        // Добавляем поддержку мыши: при скролле колёсиком тоже срабатывает (уже есть scroll)
+    })();
+</script>
 </body>
 </html>
