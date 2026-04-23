@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Цветы | Максимально влево</title>
+    <title>Цветы | ПК + телефон: максимально влево</title>
     <style>
         /* Полный сброс — никаких отступов */
         * {
@@ -18,7 +18,7 @@
             padding: 0;
             background-color: #ffffff;
             width: 100%;
-            overflow-x: hidden;    /* скрываем возможное вылезание за правый край, но левое вылезание разрешено */
+            overflow-x: hidden;    /* скрываем вылезание только по горизонтали, чтобы не было полосы прокрутки */
         }
 
         body {
@@ -31,10 +31,10 @@
             max-width: 100%;
             margin: 0;
             padding: 0;
-            overflow: visible;     /* чтобы левый съезд был виден */
+            overflow: visible;
         }
 
-        /* Верхняя строка: цветы1 (сдвигаем влево на 2 дополнительных шага) + цветы3 справа */
+        /* Верхняя строка: цветы1 + цветы3 */
         .top-line {
             display: flex;
             justify-content: space-between;
@@ -47,7 +47,7 @@
             overflow: visible;
         }
 
-        /* ----- ЦВЕТЫ1: сдвигаем влево на 2 шага (сначала относительный сдвиг, потом еще margin-left) ----- */
+        /* ----- ЦВЕТЫ1: СДВИГ ВЛЕВО НА ДВА ШАГА (ОТРИЦАТЕЛЬНЫЕ MARGIN) ДЛЯ ВСЕХ УСТРОЙСТВ ----- */
         .flower-left {
             flex: 1;
             text-align: left;
@@ -55,9 +55,8 @@
             padding: 0;
             line-height: 0;
             position: relative;
-            left: 0;
-            /* Первый шаг влево: отрицательный отступ */
-            margin-left: -15px;   /* первый сдвиг */
+            /* ПЕРВЫЙ ШАГ ВЛЕВО: отрицательный margin у родителя */
+            margin-left: -20px;
         }
         .flower-left img {
             display: block;
@@ -66,43 +65,11 @@
             height: auto;
             margin: 0;
             padding: 0;
-            /* Второй шаг влево: дополнительный отрицательный margin у самой картинки */
-            margin-left: -12px;   /* второй сдвиг, итого -27px от исходного положения */
+            /* ВТОРОЙ ШАГ ВЛЕВО: отрицательный margin у самой картинки */
+            margin-left: -18px;
             transform-origin: left center;
             transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             cursor: pointer;
-            position: relative;
-            left: 0;
-        }
-
-        /* Усиление для телефонов и ПК: ещё левее */
-        @media (max-width: 768px) {
-            .flower-left {
-                margin-left: -20px;   /* первый шаг на телефонах больше */
-            }
-            .flower-left img {
-                margin-left: -18px;   /* второй шаг больше */
-            }
-        }
-
-        /* Для очень маленьких экранов — сдвигаем еще чуть-чуть, чтобы точно было "ещё на два раза влево" */
-        @media (max-width: 480px) {
-            .flower-left {
-                margin-left: -25px;
-            }
-            .flower-left img {
-                margin-left: -22px;
-            }
-        }
-
-        /* Для больших экранов (ПК) тоже сохраняем двойной сдвиг */
-        @media (min-width: 1024px) {
-            .flower-left {
-                margin-left: -18px;
-            }
-            .flower-left img {
-                margin-left: -14px;
-            }
         }
 
         /* ----- ЦВЕТЫ3: прижата вправо, уменьшена в 2 раза ----- */
@@ -159,17 +126,13 @@
             transition: transform 0.1s ease;
         }
 
-        /* Адаптация под телефоны: всё наверху, цветы1 — максимально сдвинута влево */
+        /* ===== ДЛЯ ТЕЛЕФОНОВ: УСИЛИВАЕМ СДВИГ (тех же 2 шага, но побольше) ===== */
         @media (max-width: 768px) {
-            body, html {
-                overflow-x: hidden;
+            .flower-left {
+                margin-left: -28px;   /* первый шаг на телефонах больше */
             }
-            .main {
-                padding: 0;
-            }
-            .top-line {
-                margin: 0;
-                padding: 0;
+            .flower-left img {
+                margin-left: -22px;   /* второй шаг больше */
             }
             .flower-right img {
                 width: 52%;
@@ -180,7 +143,14 @@
             }
         }
 
+        /* Для очень маленьких телефонов (iPhone SE, 375px) — дополнительное смещение */
         @media (max-width: 480px) {
+            .flower-left {
+                margin-left: -35px;
+            }
+            .flower-left img {
+                margin-left: -25px;
+            }
             .flower-right img {
                 width: 55%;
                 max-width: 55%;
@@ -188,6 +158,26 @@
             .flower-center img {
                 width: 40%;
                 max-width: 40%;
+            }
+        }
+
+        /* ===== ДЛЯ ПК (ШИРОКИЕ ЭКРАНЫ) — ТОЖЕ СДВИГАЕМ НА ДВА ШАГА, НО УМЕРЕННО ===== */
+        @media (min-width: 1024px) {
+            .flower-left {
+                margin-left: -30px;   /* первый шаг на ПК */
+            }
+            .flower-left img {
+                margin-left: -20px;   /* второй шаг на ПК */
+            }
+        }
+
+        /* Для больших мониторов (чтоб не терялся эффект) */
+        @media (min-width: 1440px) {
+            .flower-left {
+                margin-left: -40px;
+            }
+            .flower-left img {
+                margin-left: -25px;
             }
         }
 
