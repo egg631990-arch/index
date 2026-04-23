@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Цветы | Левая в край, всё вверху</title>
+    <title>Цветы | Крайнее левое положение</title>
     <style>
-        /* Полный сброс — никаких отступов */
+        /* Полный сброс — абсолютно никаких отступов у body и html */
         * {
             margin: 0;
             padding: 0;
@@ -13,16 +13,20 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        body {
-            background-color: #ffffff;
-            min-height: 100vh;
-            /* Убираем вообще все отступы у body */
+        html, body {
             margin: 0;
             padding: 0;
+            background-color: #ffffff;
+            width: 100%;
+            overflow-x: hidden;    /* чтобы ничего не вылазило за пределы */
+        }
+
+        body {
+            min-height: 100vh;
             font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
         }
 
-        /* Главный контейнер — без отступов, строго к краям */
+        /* Главный контейнер — без отступов, на всю ширину */
         .main {
             width: 100%;
             max-width: 100%;
@@ -30,7 +34,7 @@
             padding: 0;
         }
 
-        /* Верхняя часть: строка с цветы1 (слева в край) и цветы3 (справа) */
+        /* Верхняя строка: цветы1 (в левый край) и цветы3 (в правый край) */
         .top-line {
             display: flex;
             justify-content: space-between;
@@ -38,17 +42,19 @@
             width: 100%;
             margin: 0;
             padding: 0;
-            /* Никаких gap, чтобы фотка слева встала плотно к левому краю */
             gap: 0;
         }
 
-        /* ----- ЦВЕТЫ1 — ПРИЖАТА В САМЫЙ ЛЕВЫЙ КРАЙ БЕЗ ОТСТУПОВ ----- */
+        /* ----- ЦВЕТЫ1: МАКСИМАЛЬНО ВЛЕВО (вплотную к границе экрана) ----- */
         .flower-left {
             flex: 1;
             text-align: left;
             margin: 0;
             padding: 0;
-            line-height: 0;  /* убирает лишние пробелы под картинкой */
+            line-height: 0;
+            /* Убираем любые возможные внутренние сдвиги */
+            position: relative;
+            left: 0;
         }
         .flower-left img {
             display: block;
@@ -57,12 +63,20 @@
             height: auto;
             margin: 0;
             padding: 0;
+            /* Прижимаем к самому краю: убираем любые отступы слева */
+            margin-left: 0;
             transform-origin: left center;
             transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             cursor: pointer;
         }
 
-        /* ----- ЦВЕТЫ3 — ПРИЖАТА В ПРАВЫЙ КРАЙ, УМЕНЬШЕНА В 2 РАЗА ----- */
+        /* Дополнительный приём: физически сдвигаем контейнер влево, если есть скрытые отступы */
+        .flower-left {
+            margin-left: 0 !important;
+            padding-left: 0 !important;
+        }
+
+        /* ----- ЦВЕТЫ3: ПРИЖАТА ВПРАВЫЙ КРАЙ, УМЕНЬШЕНА В 2 РАЗА ----- */
         .flower-right {
             flex: 1;
             text-align: right;
@@ -82,11 +96,11 @@
             cursor: pointer;
         }
 
-        /* ----- ЦВЕТЫ4 — УМЕНЬШЕНА В 3 РАЗА, ПО ЦЕНТРУ, НО ВВЕРХУ (под верхней строкой) ----- */
+        /* ----- ЦВЕТЫ4: УМЕНЬШЕНА В 3 РАЗА, ПО ЦЕНТРУ, ВВЕРХУ ----- */
         .flower-center {
             text-align: center;
             margin: 0;
-            margin-top: 20px;    /* небольшой отступ от верхних фото, но всё равно в верхней зоне */
+            margin-top: 20px;
             padding: 0;
             line-height: 0;
         }
@@ -109,7 +123,7 @@
             }
         }
 
-        /* Для телефонов: касание увеличивает, без залипаний */
+        /* Для телефонов и тач-устройств: увеличение по нажатию */
         .flower-left img:active,
         .flower-right img:active,
         .flower-center img:active {
@@ -117,71 +131,96 @@
             transition: transform 0.1s ease;
         }
 
-        /* ===== ОПТИМИЗАЦИЯ ПОД ТЕЛЕФОНЫ: все фото наверху, левая строго у края ===== */
+        /* ===== ОПТИМИЗАЦИЯ ПОД ТЕЛЕФОНЫ И ПК: цветы1 ещё левее ===== */
+        /* Для всех устройств: убираем абсолютно все возможные отступы у родителя */
+        @media (max-width: 9999px) {
+            .flower-left,
+            .flower-left img {
+                margin-left: 0 !important;
+                padding-left: 0 !important;
+                border-left: none !important;
+            }
+            /* Дополнительный "якорь" в самый угол: даже если браузер добавляет странный отступ */
+            body > .main > .top-line > .flower-left {
+                margin-left: -0.5px;  /* микро-сдвиг для борьбы с белой линией на некоторых экранах */
+            }
+        }
+
+        /* Для телефонов — ещё жёстче прижимаем, убираем возможный gap от родительских элементов */
         @media (max-width: 768px) {
-            body {
+            body, html {
+                overflow-x: hidden;
+                margin: 0;
+                padding: 0;
+            }
+            .main {
                 padding: 0;
                 margin: 0;
             }
-            .main {
-                padding: 0 0 20px 0;
-            }
-            /* убираем любые возможные отступы у контейнеров */
             .top-line {
                 margin: 0;
                 padding: 0;
                 gap: 0;
             }
-            /* цветы1 — прижата в самый-самый левый край экрана */
+            /* Цветы1: крайний левый без вариантов */
             .flower-left {
-                margin: 0;
-                padding: 0;
+                margin: 0 !important;
+                padding: 0 !important;
+                text-align: left;
             }
             .flower-left img {
-                margin-left: 0;
-                padding-left: 0;
+                margin-left: 0 !important;
+                padding-left: 0 !important;
                 max-width: 100%;
             }
-            /* цветы3 — прижата вправо без отступа */
+            /* Цветы3: прижаты вправо */
             .flower-right {
-                margin: 0;
-                padding: 0;
+                margin: 0 !important;
+                padding: 0 !important;
             }
             .flower-right img {
                 margin-right: 0;
-                padding-right: 0;
-            }
-            /* Нижняя фотка (цветы4) поднята наверх — следует сразу после цветы3 */
-            .flower-center {
-                margin-top: 18px;
-                margin-bottom: 0;
-                padding: 0;
-            }
-            
-            /* На телефонах возможно, цветы3 станет чуть шире для комфорта, но сохраняем пропорцию ~в 2 раза */
-            .flower-right img {
                 width: 52%;
                 max-width: 52%;
             }
-            /* для очень узких экранов сохраняем логику */
+            /* Цветы4 наверху, подняты */
+            .flower-center {
+                margin-top: 18px;
+            }
         }
 
-        /* Дополнительная подстройка для совсем маленьких телефонов (iPhone SE, 375px) */
+        /* Доп. доводка для совсем маленьких телефонов (iPhone SE, 375px) */
         @media (max-width: 480px) {
             .flower-right img {
                 width: 55%;
                 max-width: 55%;
             }
             .flower-center img {
-                width: 40%;     /* адаптивно, но все еще маленькая (меньше чем в 2.5 раза) */
+                width: 40%;
                 max-width: 40%;
             }
-            .flower-center {
-                margin-top: 15px;
+            /* Усиленный сдвиг влево для цветы1 */
+            .flower-left {
+                margin-left: -1px !important;
             }
         }
 
-        /* Убираем любые скругления, рамки, тени — только чистые фото */
+        /* Для больших экранов (ПК) тоже гарантируем, что фото в левом краю */
+        @media (min-width: 1024px) {
+            .flower-left img {
+                margin-left: 0;
+            }
+            .flower-left {
+                margin-left: 0;
+                padding-left: 0;
+            }
+            /* Микро-коррекция, если есть тень от body */
+            body {
+                padding: 0;
+            }
+        }
+
+        /* Убираем всё лишнее: скругления, рамки, тени */
         img {
             border-radius: 0;
             box-shadow: none;
@@ -189,7 +228,7 @@
             background: transparent;
         }
 
-        /* Гарантия, что левая картинка всегда у самого края без микросдвигов */
+        /* Гарантия, что левый блок flex-start без дополнительных смещений */
         .flower-left {
             display: flex;
             justify-content: flex-start;
@@ -201,7 +240,7 @@
 </head>
 <body>
 <div class="main">
-    <!-- Верхняя строка: цветы1 максимально слева, цветы3 максимально справа -->
+    <!-- Верхняя строка: цветы1 прижата к левому краю, цветы3 — к правому -->
     <div class="top-line">
         <div class="flower-left">
             <img src="цветы1.png" alt="цветы1">
@@ -210,7 +249,7 @@
             <img src="цветы3.png" alt="цветы3">
         </div>
     </div>
-    <!-- Фотка цветы4: по центру, но находится сразу под верхней строкой (вверху) -->
+    <!-- Цветы4 — по центру, но в верхней части экрана -->
     <div class="flower-center">
         <img src="цветы4.png" alt="цветы4">
     </div>
