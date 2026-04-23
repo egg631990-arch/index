@@ -25,6 +25,8 @@
             min-height: 100vh;
             font-family: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
             background: #ffffff;
+            display: flex;
+            flex-direction: column;
         }
 
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap');
@@ -81,6 +83,7 @@
             max-width: 100%;
             margin: 0;
             padding: 0;
+            flex: 1;
         }
 
         /* Секции */
@@ -219,6 +222,14 @@
             background: transparent;
         }
 
+        /* БОЛЬШОЙ ПРЯМОУГОЛЬНИК ВНИЗУ ЦВЕТА #232333 */
+        .big-footer-rect {
+            width: 100%;
+            background-color: #232333;
+            min-height: 280px;
+            margin-top: 60px;
+        }
+
         /* Адаптив */
         @media (max-width: 768px) {
             .navbar { padding: 6px 12px; }
@@ -232,6 +243,10 @@
             .main-title { font-size: 42px; }
             .subtitle { font-size: 20px; }
             .text-block { margin: 30px 15px 40px; }
+            .big-footer-rect {
+                min-height: 200px;
+                margin-top: 40px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -242,6 +257,10 @@
             .main-title { font-size: 32px; }
             .subtitle { font-size: 18px; }
             .nav-container { gap: 24px; }
+            .big-footer-rect {
+                min-height: 160px;
+                margin-top: 30px;
+            }
         }
 
         @media (min-width: 1024px) {
@@ -293,12 +312,15 @@
         </div>
     </section>
 
-    <!-- Секция ЗАКАЗ - абсолютно пустая, без текста -->
+    <!-- Секция ЗАКАЗ - абсолютно пустая -->
     <section id="order-section" class="section"></section>
 
     <!-- Секция КОНТАКТ - абсолютно пустая -->
     <section id="contact-section" class="section"></section>
 </div>
+
+<!-- БОЛЬШОЙ ПРЯМОУГОЛЬНИК В САМОМ ВНИЗУ ЦВЕТА #232333 -->
+<div class="big-footer-rect"></div>
 
 <script>
     // Дрожание фоток при скролле
