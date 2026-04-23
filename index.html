@@ -28,16 +28,85 @@
             background: #ffffff;
         }
 
-        /* Подключаем красивый шрифт Playfair Display и элегантный для подзаголовка */
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500&display=swap');
+        /* Подключаем красивые шрифты */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-        /* Главный контейнер */
+        /* ========== РОЗОВО-БЕЛАЯ ПОЛОСКА НАВЕРХУ ========== */
+        .navbar {
+            background: linear-gradient(95deg, #ff9eb5 0%, #ffe0e8 40%, #ffb6c7 100%);
+            padding: 14px 20px;
+            box-shadow: 0 2px 12px rgba(255, 105, 130, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(2px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .nav-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: #ffffff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            padding: 6px 0;
+            position: relative;
+            background: transparent;
+            border: none;
+        }
+
+        /* Активный пункт (жирный + чуть больше) */
+        .nav-item.active {
+            font-weight: 800;
+            font-size: 1.45rem;
+            color: #fff4e6;
+            text-shadow: 0 0 6px rgba(210, 60, 90, 0.4);
+            transform: scale(1.02);
+        }
+
+        /* Ховер для всех */
+        .nav-item:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Маленькая декоративная черточка под активным (доп. стиль) */
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background: rgba(255, 245, 235, 0.8);
+            border-radius: 4px;
+        }
+
+        /* Основной контент */
         .main {
             width: 100%;
             max-width: 100%;
             margin: 0;
             padding: 0;
             overflow: visible;
+        }
+
+        /* Секции для навигации */
+        .section {
+            scroll-margin-top: 85px; /* чтобы навигация не перекрывала заголовок */
         }
 
         /* Верхняя строка: цветы1 + цветы3 */
@@ -117,7 +186,7 @@
             will-change: transform;
         }
 
-        /* ---------- ТЕКСТОВЫЙ БЛОК: "Цветы/Букеты" и "на заказ" ---------- */
+        /* ТЕКСТОВЫЙ БЛОК: "Цветы/Букеты" и "на заказ" */
         .text-block {
             text-align: center;
             margin: 50px 20px 60px 20px;
@@ -133,7 +202,6 @@
             color: #2d2d2a;
             line-height: 1.2;
             text-shadow: 2px 2px 12px rgba(0,0,0,0.02);
-            word-break: keep-all;
         }
 
         .main-title .slash {
@@ -147,9 +215,6 @@
             font-size: 28px;
             font-weight: 400;
             letter-spacing: 0.12em;
-            color: #8b6b4f;
-            margin-top: 16px;
-            text-transform: uppercase;
             background: linear-gradient(135deg, #b87c5a 0%, #d9a77a 100%);
             background-clip: text;
             -webkit-background-clip: text;
@@ -158,7 +223,6 @@
             padding: 0 10px;
         }
 
-        /* Декоративная линия для элегантности */
         .text-block::before {
             content: '';
             display: block;
@@ -168,7 +232,41 @@
             margin: 0 auto 25px auto;
         }
 
-        /* Стили для дрожания при скролле (плавный тремор) */
+        /* Секция "заказ" и "контакт" - дополнительное содержимое (красиво и не пусто) */
+        .order-section, .contact-section {
+            text-align: center;
+            padding: 50px 20px 80px;
+            max-width: 800px;
+            margin: 0 auto;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .order-title, .contact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            color: #b45f3b;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .order-text, .contact-text {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #4a3b2f;
+            background: #fff9f5;
+            padding: 30px;
+            border-radius: 36px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.03);
+        }
+
+        .contact-item {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: 500;
+            color: #a25d3c;
+        }
+
+        /* Дрожание при скролле */
         @keyframes gentleShake {
             0% { transform: translate(0px, 0px) rotate(0deg); }
             15% { transform: translate(-1.2px, 0.8px) rotate(0.3deg); }
@@ -180,17 +278,14 @@
             100% { transform: translate(0px, 0px) rotate(0deg); }
         }
 
-        /* Класс для дрожания — применяется при скролле */
         .shake-on-scroll {
             animation: gentleShake 0.45s ease-in-out forwards;
         }
 
-        /* Для плавности добавляем transition к изображениям */
         .flower-left img, .flower-right img, .flower-center img {
             transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1), filter 0.2s;
         }
 
-        /* Эффект наведения */
         @media (hover: hover) {
             .flower-left img:hover,
             .flower-right img:hover,
@@ -204,10 +299,9 @@
         .flower-right img:active,
         .flower-center img:active {
             transform: scale(1.04);
-            transition: transform 0.1s ease;
         }
 
-        /* ===== АДАПТАЦИЯ ПОД ТЕЛЕФОНЫ И ПК (сдвиги и размеры) ===== */
+        /* Адаптивность */
         @media (max-width: 768px) {
             .flower-left {
                 margin-left: -28px;
@@ -227,10 +321,18 @@
             }
             .subtitle {
                 font-size: 22px;
-                letter-spacing: 0.1em;
             }
             .text-block {
                 margin: 40px 15px 50px 15px;
+            }
+            .nav-container {
+                gap: 32px;
+            }
+            .nav-item {
+                font-size: 1rem;
+            }
+            .nav-item.active {
+                font-size: 1.25rem;
             }
         }
 
@@ -254,7 +356,15 @@
             }
             .subtitle {
                 font-size: 18px;
-                letter-spacing: 0.08em;
+            }
+            .nav-container {
+                gap: 24px;
+            }
+            .nav-item {
+                font-size: 0.9rem;
+            }
+            .nav-item.active {
+                font-size: 1.2rem;
             }
         }
 
@@ -266,7 +376,6 @@
                 margin-left: -20px;
             }
         }
-
         @media (min-width: 1440px) {
             .flower-left {
                 margin-left: -40px;
@@ -280,120 +389,181 @@
             border-radius: 0;
             box-shadow: none;
             border: none;
-            background: transparent;
         }
-
         .flower-left {
             display: flex;
             justify-content: flex-start;
             overflow: visible;
         }
-        .flower-left img {
-            flex-shrink: 0;
-        }
-
-        /* Убираем скролл-бар для красоты (но оставляем функционал) */
-        ::-webkit-scrollbar {
-            width: 5px;
-            background: #f5f0ea;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #d4b48c;
-            border-radius: 10px;
-        }
     </style>
 </head>
 <body>
-<div class="main">
-    <!-- Верхняя строка: цветы1 + цветы3 -->
-    <div class="top-line">
-        <div class="flower-left">
-            <img src="цветы1.png" alt="цветы1" class="flower-img" data-shake="true">
-        </div>
-        <div class="flower-right">
-            <img src="цветы3.png" alt="цветы3" class="flower-img" data-shake="true">
-        </div>
-    </div>
 
-    <!-- КРАСИВЫЙ ТЕКСТОВЫЙ БЛОК между фотками -->
-    <div class="text-block">
-        <div class="main-title">
-            Цветы<span class="slash">/</span>Букеты
-        </div>
-        <div class="subtitle">
-            на заказ
-        </div>
-    </div>
-
-    <!-- Фотка цветы4 (ниже текста) -->
-    <div class="flower-center">
-        <img src="цветы4.png" alt="цветы4" class="flower-img" data-shake="true">
+<!-- РОЗОВАЯ ПОЛОСКА ВВЕРХУ -->
+<div class="navbar">
+    <div class="nav-container">
+        <button class="nav-item" data-section="home">Главная</button>
+        <button class="nav-item" data-section="order">Заказ</button>
+        <button class="nav-item" data-section="contact">Контакт</button>
     </div>
 </div>
 
+<div class="main">
+    <!-- Секция Главная (содержит цветы1, цветы3, текст, цветы4) -->
+    <section id="home-section" class="section">
+        <div class="top-line">
+            <div class="flower-left">
+                <img src="цветы1.png" alt="цветы1" class="flower-img" data-shake="true">
+            </div>
+            <div class="flower-right">
+                <img src="цветы3.png" alt="цветы3" class="flower-img" data-shake="true">
+            </div>
+        </div>
+
+        <div class="text-block">
+            <div class="main-title">
+                Цветы<span class="slash">/</span>Букеты
+            </div>
+            <div class="subtitle">
+                на заказ
+            </div>
+        </div>
+
+        <div class="flower-center">
+            <img src="цветы4.png" alt="цветы4" class="flower-img" data-shake="true">
+        </div>
+    </section>
+
+    <!-- Секция ЗАКАЗ -->
+    <section id="order-section" class="section order-section">
+        <div class="order-title">💐 Как сделать заказ</div>
+        <div class="order-text">
+            Выберите букет из наших фотографий или пришлите референс.<br>
+            Мы соберем композицию из свежайших цветов. Доставка от 1 часа.<br>
+            <strong>Свяжитесь удобным способом, и мы обсудим детали.</strong>
+        </div>
+    </section>
+
+    <!-- Секция КОНТАКТ -->
+    <section id="contact-section" class="section contact-section">
+        <div class="contact-title">🌿 Контакты</div>
+        <div class="contact-text">
+            Telegram / WhatsApp: <strong>+7 999 123-45-67</strong><br>
+            Instagram: @flowers_bukety<br>
+            Email: zakaz@flowers.ru<br><br>
+            <span style="font-size: 14px; opacity: 0.7;">Работаем ежедневно с 9:00 до 21:00</span>
+        </div>
+    </section>
+</div>
+
 <script>
-    (function() {
-        // Плавный тремор (дрожание) фоток при скролле
-        // Выбираем все изображения с классом flower-img (все три фото)
-        const images = document.querySelectorAll('.flower-img');
-        
-        // Флаг для предотвращения слишком частого срабатывания (throttle)
-        let ticking = false;
-        let lastScrollY = window.scrollY;
-        
-        // Функция добавления класса дрожания
-        function addShakeEffect() {
-            images.forEach(img => {
-                // Убираем класс, если он есть, чтобы перезапустить анимацию
+    // 1) Дрожание фоток при скролле (оставляем)
+    const images = document.querySelectorAll('.flower-img');
+    let ticking = false;
+    let lastScrollY = window.scrollY;
+
+    function addShakeEffect() {
+        images.forEach(img => {
+            img.classList.remove('shake-on-scroll');
+            void img.offsetWidth; // reflow
+            img.classList.add('shake-on-scroll');
+            setTimeout(() => {
                 img.classList.remove('shake-on-scroll');
-                // Принудительный reflow для перезапуска анимации
-                void img.offsetWidth;
-                img.classList.add('shake-on-scroll');
-                
-                // Убираем класс после окончания анимации, чтобы можно было снова добавить при след. скролле
-                setTimeout(() => {
-                    img.classList.remove('shake-on-scroll');
-                }, 500);
-            });
-        }
-        
-        // Обработчик скролла с throttle (requestAnimationFrame)
-        function onScrollHandler() {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    const currentScrollY = window.scrollY;
-                    // Добавляем эффект только если скролл изменился (пользователь листает)
-                    if (currentScrollY !== lastScrollY) {
-                        addShakeEffect();
-                        lastScrollY = currentScrollY;
-                    }
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        }
-        
-        // Добавляем эффект также при первом скролле + начальная инициализация для "первого касания"
-        window.addEventListener('scroll', onScrollHandler);
-        
-        // Плавное дрожание также при касании/листании на телефонах (touchmove)
-        let touchTimer = null;
-        window.addEventListener('touchmove', function() {
-            if (touchTimer) clearTimeout(touchTimer);
-            touchTimer = setTimeout(() => {
-                addShakeEffect();
-            }, 10);
+            }, 500);
         });
+    }
+
+    function onScrollHandler() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const currentScrollY = window.scrollY;
+                if (currentScrollY !== lastScrollY) {
+                    addShakeEffect();
+                    lastScrollY = currentScrollY;
+                }
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+    window.addEventListener('scroll', onScrollHandler);
+    window.addEventListener('touchmove', () => {
+        setTimeout(addShakeEffect, 10);
+    });
+    setTimeout(() => addShakeEffect(), 300);
+
+    // 2) НАВИГАЦИЯ: активный пункт жирный + скролл к секции
+    const navItems = document.querySelectorAll('.nav-item');
+    const homeSection = document.getElementById('home-section');
+    const orderSection = document.getElementById('order-section');
+    const contactSection = document.getElementById('contact-section');
+    
+    // Функция обновления активного пункта на основе видимой секции
+    function updateActiveNav() {
+        const scrollPos = window.scrollY + 120; // смещение для определения секции
         
-        // Дополнительно: легкое дрожание при загрузке страницы (для эффекта)
-        setTimeout(() => {
-            addShakeEffect();
-        }, 200);
+        let activeId = 'home';
+        // Определяем, какая секция сейчас в области видимости
+        const homeTop = homeSection.offsetTop;
+        const orderTop = orderSection.offsetTop;
+        const contactTop = contactSection.offsetTop;
         
-        // Чтобы эффект не был слишком назойливым, но плавным - анимация длится 0.45s
-        // При каждом листании фотки "трясутся" нежно и возвращаются в положение.
-        // Добавляем поддержку мыши: при скролле колёсиком тоже срабатывает (уже есть scroll)
-    })();
+        if (scrollPos >= contactTop - 80) {
+            activeId = 'contact';
+        } else if (scrollPos >= orderTop - 100) {
+            activeId = 'order';
+        } else {
+            activeId = 'home';
+        }
+        
+        navItems.forEach(item => {
+            const sectionVal = item.getAttribute('data-section');
+            if (sectionVal === activeId) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+    
+    // Прокрутка при клике на пункт меню
+    function scrollToSection(sectionId) {
+        let targetElement = null;
+        if (sectionId === 'home') targetElement = homeSection;
+        else if (sectionId === 'order') targetElement = orderSection;
+        else if (sectionId === 'contact') targetElement = contactSection;
+        
+        if (targetElement) {
+            const offset = 80; // высота навбара + отступ
+            const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+                top: elementPosition - offset,
+                behavior: 'smooth'
+            });
+            // Небольшая задержка, чтобы классы успели обновиться после скролла
+            setTimeout(() => {
+                updateActiveNav();
+            }, 150);
+        }
+    }
+    
+    // Добавляем обработчики клика
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const sectionName = item.getAttribute('data-section');
+            scrollToSection(sectionName);
+        });
+    });
+    
+    // Обновление активного пункта при прокрутке + начальная установка
+    window.addEventListener('scroll', () => {
+        requestAnimationFrame(updateActiveNav);
+    });
+    window.addEventListener('load', () => {
+        updateActiveNav();
+        // Дополнительно: активный пункт совпадает с видимой областью
+    });
+    updateActiveNav();
 </script>
 </body>
 </html>
