@@ -1,24 +1,121 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-<h1>Создание книг онлайн</h1 >
-  <button type="reset">Начать</button>
-<br><br><br>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цветы - композиция</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<b>Введите название</b>
+        body {
+            background-color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: system-ui, 'Segoe UI', sans-serif;
+            position: relative;
+        }
 
-<form action="name.html" method="post">
-    <label for="Начать"></label>
-    <input type="text" placeholder="Название">
-<br>
-<a>После нажмите на "Enter"</a>
+        /* Основной контейнер-сетка, который держит все блоки */
+        .gallery {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
 
-</form>
-  </body>
+        /* Верхняя область: фотка слева (цветы1) и справа (цветы3) */
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* Левый блок — цветы1 */
+        .flower-left {
+            flex: 1;
+            min-width: 200px;
+            text-align: left;
+        }
+
+        /* Правый блок — цветы3 */
+        .flower-right {
+            flex: 1;
+            min-width: 200px;
+            text-align: right;
+        }
+
+        /* Нижний центр — цветы4 */
+        .bottom-center {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Стили для всех изображений */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease;
+            background-color: #ffffff;
+        }
+
+        img:hover {
+            transform: scale(1.01);
+        }
+
+        /* Дополнительно — чтобы на совсем маленьких экранах не ломалось */
+        @media (max-width: 700px) {
+            .top-row {
+                flex-direction: column;
+                align-items: center;
+            }
+            .flower-left, .flower-right {
+                text-align: center;
+                width: 100%;
+            }
+            .flower-right {
+                margin-top: 20px;
+            }
+        }
+
+        /* Абсолютно никакого лишнего текста, только фотки */
+        .caption, .description {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <!-- Верхняя строка: слева "цветы1", справа "цветы3" -->
+        <div class="top-row">
+            <div class="flower-left">
+                <!-- Картинка "цветы1" -->
+                <img src="https://placehold.co/400x300/FFE6F0/FF69B4?text=Цветы1" alt="цветы1" style="max-width: 100%; border-radius: 16px;">
+            </div>
+            <div class="flower-right">
+                <!-- Картинка "цветы3" -->
+                <img src="https://placehold.co/400x300/E6F0FF/3399FF?text=Цветы3" alt="цветы3" style="max-width: 100%; border-radius: 16px;">
+            </div>
+        </div>
+
+        <!-- Ниже по центру "цветы4" -->
+        <div class="bottom-center">
+            <!-- Картинка "цветы4" -->
+            <img src="https://placehold.co/500x350/F0FFE6/66CC66?text=Цветы4" alt="цветы4" style="max-width: 100%; border-radius: 16px;">
+        </div>
+    </div>
+</body>
 </html>
-
-
