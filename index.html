@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Цветы - композиция</title>
+    <title>Цветы</title>
     <style>
         * {
             margin: 0;
@@ -18,104 +18,83 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-family: system-ui, 'Segoe UI', sans-serif;
-            position: relative;
+            padding: 40px 20px;
         }
 
-        /* Основной контейнер-сетка, который держит все блоки */
-        .gallery {
+        /* Контейнер */
+        .container {
             width: 100%;
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
-        /* Верхняя область: фотка слева (цветы1) и справа (цветы3) */
+        /* Верхняя строка: слева и справа */
         .top-row {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            gap: 30px;
+            gap: 40px;
             flex-wrap: wrap;
+            margin-bottom: 60px;
         }
 
-        /* Левый блок — цветы1 */
-        .flower-left {
+        .left {
             flex: 1;
-            min-width: 200px;
             text-align: left;
-        }
-
-        /* Правый блок — цветы3 */
-        .flower-right {
-            flex: 1;
             min-width: 200px;
+        }
+
+        .right {
+            flex: 1;
             text-align: right;
+            min-width: 200px;
         }
 
-        /* Нижний центр — цветы4 */
-        .bottom-center {
+        /* Нижний центр */
+        .center-bottom {
             text-align: center;
-            margin-top: 10px;
         }
 
-        /* Стили для всех изображений */
+        /* Стили картинок */
         img {
             max-width: 100%;
             height: auto;
-            border-radius: 16px;
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease;
-            background-color: #ffffff;
+            display: inline-block;
+            border-radius: 0;
+            box-shadow: none;
         }
 
-        img:hover {
-            transform: scale(1.01);
-        }
-
-        /* Дополнительно — чтобы на совсем маленьких экранах не ломалось */
+        /* На мобилках: лево и право по центру */
         @media (max-width: 700px) {
             .top-row {
                 flex-direction: column;
                 align-items: center;
+                gap: 40px;
             }
-            .flower-left, .flower-right {
+            .left, .right {
                 text-align: center;
                 width: 100%;
             }
-            .flower-right {
-                margin-top: 20px;
-            }
-        }
-
-        /* Абсолютно никакого лишнего текста, только фотки */
-        .caption, .description {
-            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="gallery">
-        <!-- Верхняя строка: слева "цветы1", справа "цветы3" -->
-        <div class="top-row">
-            <div class="flower-left">
-                <!-- Картинка "цветы1" -->
-                <img src="https://placehold.co/400x300/FFE6F0/FF69B4?text=Цветы1" alt="цветы1" style="max-width: 100%; border-radius: 16px;">
-            </div>
-            <div class="flower-right">
-                <!-- Картинка "цветы3" -->
-                <img src="https://placehold.co/400x300/E6F0FF/3399FF?text=Цветы3" alt="цветы3" style="max-width: 100%; border-radius: 16px;">
-            </div>
+<div class="container">
+    <!-- Верхняя часть: слева цветы1, справа цветы3 -->
+    <div class="top-row">
+        <div class="left">
+            <!-- Фотка цветы1.png из той же папки -->
+            <img src="цветы1.png" alt="цветы1">
         </div>
-
-        <!-- Ниже по центру "цветы4" -->
-        <div class="bottom-center">
-            <!-- Картинка "цветы4" -->
-            <img src="https://placehold.co/500x350/F0FFE6/66CC66?text=Цветы4" alt="цветы4" style="max-width: 100%; border-radius: 16px;">
+        <div class="right">
+            <!-- Фотка цветы3.png из той же папки -->
+            <img src="цветы3.png" alt="цветы3">
         </div>
     </div>
+
+    <!-- Ниже в центре: цветы4 -->
+    <div class="center-bottom">
+        <img src="цветы4.png" alt="цветы4">
+    </div>
+</div>
 </body>
 </html>
