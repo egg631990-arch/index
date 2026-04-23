@@ -31,50 +31,114 @@
 
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-        /* ===== ПОЛОСКА МЕНЬШЕ ===== */
-        .navbar {
+        /* ===== ПОЛОСКА С МЕНЮ ===== */
+        .top-bar {
             background: linear-gradient(95deg, #ff9eb5 0%, #ffe0e8 40%, #ffb6c7 100%);
-            padding: 8px 16px;
-            box-shadow: 0 2px 8px rgba(255, 105, 130, 0.1);
+            padding: 8px 20px;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 200;
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
         }
 
-        .nav-container {
-            max-width: 400px;
+        .top-bar-container {
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
-            justify-content: center;
-            gap: 40px;
-            align-items: baseline;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .nav-item {
+        /* Левая группа меню */
+        .menu-group {
+            display: flex;
+            gap: 40px;
+        }
+
+        /* Каждый дропдаун */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 0.03em;
+            font-weight: 600;
             color: #ffffff;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            padding: 4px 0;
             background: transparent;
             border: none;
+            cursor: pointer;
+            padding: 8px 0;
+            letter-spacing: 0.03em;
         }
 
-        /* Активный пункт — жирный и чуть больше */
-        .nav-item.active {
-            font-weight: 800;
-            font-size: 1.2rem;
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff9f5;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 10px 0;
+            z-index: 100;
+            backdrop-filter: blur(2px);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 8px 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: #4a3b2f;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ffe0d4;
+            color: #b45f3b;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Правый блок "Связь" */
+        .contact-right {
+            text-align: right;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .contact-right .contact-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #ffffff;
+            margin-bottom: 6px;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-right .phone {
+            font-size: 0.85rem;
             color: #fff4e6;
-            text-shadow: 0 0 5px rgba(210, 60, 90, 0.3);
+            font-weight: 500;
+            margin-bottom: 6px;
         }
 
-        .nav-item:hover {
-            transform: translateY(-1px);
+        .contact-right .email {
+            font-size: 0.75rem;
+            color: #fff0e0;
+            word-break: break-all;
+        }
+
+        .contact-right .sub-contact {
+            margin-top: 8px;
+            font-size: 0.7rem;
+            color: #ffe6d9;
         }
 
         /* Основной контент */
@@ -86,12 +150,10 @@
             flex: 1;
         }
 
-        /* Секции */
         .section {
             scroll-margin-top: 70px;
         }
 
-        /* Верхняя строка: цветы1 + цветы3 */
         .top-line {
             display: flex;
             justify-content: space-between;
@@ -156,7 +218,6 @@
             cursor: pointer;
         }
 
-        /* Текст между фотками */
         .text-block {
             text-align: center;
             margin: 40px 20px 50px 20px;
@@ -188,7 +249,6 @@
             color: transparent;
         }
 
-        /* Дрожание при скролле */
         @keyframes gentleShake {
             0% { transform: translate(0,0) rotate(0deg); }
             20% { transform: translate(-1px, 0.5px) rotate(0.2deg); }
@@ -202,7 +262,6 @@
             animation: gentleShake 0.4s ease-in-out forwards;
         }
 
-        /* Ховер и тап */
         @media (hover: hover) {
             .flower-left img:hover,
             .flower-right img:hover,
@@ -216,13 +275,12 @@
             transform: scale(1.04);
         }
 
-        /* Пустые секции для заказа и контакта — АБСОЛЮТНО НИЧЕГО НЕТ */
         #order-section, #contact-section {
             min-height: 1px;
             background: transparent;
         }
 
-        /* БОЛЬШОЙ ПРЯМОУГОЛЬНИК ВНИЗУ ЦВЕТА #232333 */
+        /* большой прямоугольник внизу */
         .big-footer-rect {
             width: 100%;
             background-color: #232333;
@@ -230,12 +288,25 @@
             margin-top: 60px;
         }
 
-        /* Адаптив */
+        @media (max-width: 900px) {
+            .top-bar-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .menu-group {
+                justify-content: center;
+                gap: 30px;
+                flex-wrap: wrap;
+            }
+            .contact-right {
+                text-align: center;
+            }
+        }
+
         @media (max-width: 768px) {
-            .navbar { padding: 6px 12px; }
-            .nav-container { gap: 32px; }
-            .nav-item { font-size: 0.9rem; }
-            .nav-item.active { font-size: 1.1rem; }
+            .dropbtn { font-size: 0.85rem; }
+            .dropdown-content { min-width: 170px; }
             .flower-left { margin-left: -25px; }
             .flower-left img { margin-left: -20px; }
             .flower-right img { width: 52%; }
@@ -243,10 +314,7 @@
             .main-title { font-size: 42px; }
             .subtitle { font-size: 20px; }
             .text-block { margin: 30px 15px 40px; }
-            .big-footer-rect {
-                min-height: 200px;
-                margin-top: 40px;
-            }
+            .big-footer-rect { min-height: 200px; margin-top: 40px; }
         }
 
         @media (max-width: 480px) {
@@ -256,11 +324,7 @@
             .flower-center img { width: 45%; }
             .main-title { font-size: 32px; }
             .subtitle { font-size: 18px; }
-            .nav-container { gap: 24px; }
-            .big-footer-rect {
-                min-height: 160px;
-                margin-top: 30px;
-            }
+            .big-footer-rect { min-height: 160px; margin-top: 30px; }
         }
 
         @media (min-width: 1024px) {
@@ -277,17 +341,45 @@
 </head>
 <body>
 
-<!-- ПОЛОСКА РОЗОВАЯ, МЕНЬШЕ РАЗМЕРОМ -->
-<div class="navbar">
-    <div class="nav-container">
-        <button class="nav-item" data-section="home">главная</button>
-        <button class="nav-item" data-section="order">заказ</button>
-        <button class="nav-item" data-section="contact">контакт</button>
+<!-- Верхняя полоска с меню "О нас", "Клиентам" и блоком "Связь" -->
+<div class="top-bar">
+    <div class="top-bar-container">
+        <div class="menu-group">
+            <!-- О нас -->
+            <div class="dropdown">
+                <button class="dropbtn">О нас</button>
+                <div class="dropdown-content">
+                    <a>О нас</a>
+                    <a>Доставка</a>
+                    <a>Оплата</a>
+                    <a>Соц Сети</a>
+                </div>
+            </div>
+            <!-- Клиентам -->
+            <div class="dropdown">
+                <button class="dropbtn">Клиентам</button>
+                <div class="dropdown-content">
+                    <a>Контакты</a>
+                    <a>Помощь</a>
+                    <a>Политика конфидициальности</a>
+                    <a>Условия покупки</a>
+                    <a>Помощь по букетам</a>
+                    <a>Скидки</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Правый блок "Связь" -->
+        <div class="contact-right">
+            <div class="contact-title">Связь</div>
+            <div class="phone">+790000000000</div>
+            <div class="sub-contact">Вопросы/сотрудничество</div>
+            <div class="email">gmail@gmail.com</div>
+        </div>
     </div>
 </div>
 
 <div class="main">
-    <!-- Секция главная: фотки + текст -->
     <section id="home-section" class="section">
         <div class="top-line">
             <div class="flower-left">
@@ -312,18 +404,13 @@
         </div>
     </section>
 
-    <!-- Секция ЗАКАЗ - абсолютно пустая -->
     <section id="order-section" class="section"></section>
-
-    <!-- Секция КОНТАКТ - абсолютно пустая -->
     <section id="contact-section" class="section"></section>
 </div>
 
-<!-- БОЛЬШОЙ ПРЯМОУГОЛЬНИК В САМОМ ВНИЗУ ЦВЕТА #232333 -->
 <div class="big-footer-rect"></div>
 
 <script>
-    // Дрожание фоток при скролле
     const images = document.querySelectorAll('.flower-img');
     let ticking = false;
     let lastScroll = window.scrollY;
@@ -350,13 +437,13 @@
         }
     });
 
-    // Навигация: активный пункт жирный и больше
     const navBtns = document.querySelectorAll('.nav-item');
     const homeSec = document.getElementById('home-section');
     const orderSec = document.getElementById('order-section');
     const contactSec = document.getElementById('contact-section');
 
     function updateActive() {
+        if (!homeSec || !orderSec || !contactSec) return;
         const scrollPos = window.scrollY + 100;
         const homeTop = homeSec.offsetTop;
         const orderTop = orderSec.offsetTop;
@@ -367,10 +454,12 @@
         else if (scrollPos >= orderTop - 60) active = 'order';
         else active = 'home';
 
-        navBtns.forEach(btn => {
-            if (btn.dataset.section === active) btn.classList.add('active');
-            else btn.classList.remove('active');
-        });
+        if (navBtns.length) {
+            navBtns.forEach(btn => {
+                if (btn.dataset.section === active) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+        }
     }
 
     function scrollToSection(sectionId) {
@@ -387,17 +476,17 @@
         }
     }
 
-    navBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            scrollToSection(btn.dataset.section);
+    if (navBtns.length) {
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                scrollToSection(btn.dataset.section);
+            });
         });
-    });
+    }
 
     window.addEventListener('scroll', () => requestAnimationFrame(updateActive));
     window.addEventListener('load', updateActive);
     updateActive();
-    
-    // начальная дрожь
     setTimeout(shake, 200);
 </script>
 </body>
