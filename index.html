@@ -31,7 +31,7 @@
         /* Подключаем красивые шрифты */
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-        /* ========== РОЗОВО-БЕЛАЯ ПОЛОСКА НАВЕРХУ ========== */
+        /* ========== РОЗОВО-БЕЛАЯ ПОЛОСКА ВВЕРХУ ========== */
         .navbar {
             background: linear-gradient(95deg, #ff9eb5 0%, #ffe0e8 40%, #ffb6c7 100%);
             padding: 14px 20px;
@@ -83,7 +83,7 @@
             text-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        /* Маленькая декоративная черточка под активным (доп. стиль) */
+        /* Маленькая декоративная черточка под активным */
         .nav-item.active::after {
             content: '';
             position: absolute;
@@ -106,7 +106,7 @@
 
         /* Секции для навигации */
         .section {
-            scroll-margin-top: 85px; /* чтобы навигация не перекрывала заголовок */
+            scroll-margin-top: 85px;
         }
 
         /* Верхняя строка: цветы1 + цветы3 */
@@ -122,7 +122,7 @@
             overflow: visible;
         }
 
-        /* ----- ЦВЕТЫ1: сдвиг влево на два шага (ПК + телефон) ----- */
+        /* ----- ЦВЕТЫ1: сдвиг влево ----- */
         .flower-left {
             flex: 1;
             text-align: left;
@@ -232,38 +232,21 @@
             margin: 0 auto 25px auto;
         }
 
-        /* Секция "заказ" и "контакт" - дополнительное содержимое (красиво и не пусто) */
-        .order-section, .contact-section {
-            text-align: center;
-            padding: 50px 20px 80px;
-            max-width: 800px;
-            margin: 0 auto;
+        /* Пустые секции для заказа и контакта (без текста, только чтобы кнопки переключали) */
+        .empty-section {
+            height: 60vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-family: 'Montserrat', sans-serif;
-        }
-
-        .order-title, .contact-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 38px;
-            color: #b45f3b;
-            margin-bottom: 24px;
-            font-weight: 600;
-        }
-
-        .order-text, .contact-text {
-            font-size: 18px;
-            line-height: 1.5;
-            color: #4a3b2f;
-            background: #fff9f5;
-            padding: 30px;
-            border-radius: 36px;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.03);
-        }
-
-        .contact-item {
-            margin-top: 20px;
-            font-size: 20px;
-            font-weight: 500;
-            color: #a25d3c;
+            font-size: 24px;
+            color: #d4b48c;
+            background: #fefaf7;
+            border-radius: 48px;
+            margin: 40px 20px;
+            text-align: center;
+            backdrop-filter: blur(2px);
         }
 
         /* Дрожание при скролле */
@@ -334,6 +317,11 @@
             .nav-item.active {
                 font-size: 1.25rem;
             }
+            .empty-section {
+                font-size: 20px;
+                margin: 30px 15px;
+                min-height: 300px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -402,14 +390,14 @@
 <!-- РОЗОВАЯ ПОЛОСКА ВВЕРХУ -->
 <div class="navbar">
     <div class="nav-container">
-        <button class="nav-item" data-section="home">Главная</button>
-        <button class="nav-item" data-section="order">Заказ</button>
-        <button class="nav-item" data-section="contact">Контакт</button>
+        <button class="nav-item" data-section="home">главная</button>
+        <button class="nav-item" data-section="order">заказ</button>
+        <button class="nav-item" data-section="contact">контакт</button>
     </div>
 </div>
 
 <div class="main">
-    <!-- Секция Главная (содержит цветы1, цветы3, текст, цветы4) -->
+    <!-- Секция Главная (фотки и текст) -->
     <section id="home-section" class="section">
         <div class="top-line">
             <div class="flower-left">
@@ -434,30 +422,19 @@
         </div>
     </section>
 
-    <!-- Секция ЗАКАЗ -->
-    <section id="order-section" class="section order-section">
-        <div class="order-title">💐 Как сделать заказ</div>
-        <div class="order-text">
-            Выберите букет из наших фотографий или пришлите референс.<br>
-            Мы соберем композицию из свежайших цветов. Доставка от 1 часа.<br>
-            <strong>Свяжитесь удобным способом, и мы обсудим детали.</strong>
-        </div>
+    <!-- Секция ЗАКАЗ (без лишнего текста, просто чтобы переключатель работал) -->
+    <section id="order-section" class="section empty-section">
+        🌸 Здесь будет форма заказа
     </section>
 
-    <!-- Секция КОНТАКТ -->
-    <section id="contact-section" class="section contact-section">
-        <div class="contact-title">🌿 Контакты</div>
-        <div class="contact-text">
-            Telegram / WhatsApp: <strong>+7 999 123-45-67</strong><br>
-            Instagram: @flowers_bukety<br>
-            Email: zakaz@flowers.ru<br><br>
-            <span style="font-size: 14px; opacity: 0.7;">Работаем ежедневно с 9:00 до 21:00</span>
-        </div>
+    <!-- Секция КОНТАКТ (без лишнего текста) -->
+    <section id="contact-section" class="section empty-section">
+        📞 Здесь будет контактная информация
     </section>
 </div>
 
 <script>
-    // 1) Дрожание фоток при скролле (оставляем)
+    // 1) Дрожание фоток при скролле
     const images = document.querySelectorAll('.flower-img');
     let ticking = false;
     let lastScrollY = window.scrollY;
@@ -465,7 +442,7 @@
     function addShakeEffect() {
         images.forEach(img => {
             img.classList.remove('shake-on-scroll');
-            void img.offsetWidth; // reflow
+            void img.offsetWidth;
             img.classList.add('shake-on-scroll');
             setTimeout(() => {
                 img.classList.remove('shake-on-scroll');
@@ -492,22 +469,20 @@
     });
     setTimeout(() => addShakeEffect(), 300);
 
-    // 2) НАВИГАЦИЯ: активный пункт жирный + скролл к секции
+    // 2) НАВИГАЦИЯ: активный пункт жирный + переключение
     const navItems = document.querySelectorAll('.nav-item');
     const homeSection = document.getElementById('home-section');
     const orderSection = document.getElementById('order-section');
     const contactSection = document.getElementById('contact-section');
     
-    // Функция обновления активного пункта на основе видимой секции
     function updateActiveNav() {
-        const scrollPos = window.scrollY + 120; // смещение для определения секции
+        const scrollPos = window.scrollY + 120;
         
-        let activeId = 'home';
-        // Определяем, какая секция сейчас в области видимости
         const homeTop = homeSection.offsetTop;
         const orderTop = orderSection.offsetTop;
         const contactTop = contactSection.offsetTop;
         
+        let activeId = 'home';
         if (scrollPos >= contactTop - 80) {
             activeId = 'contact';
         } else if (scrollPos >= orderTop - 100) {
@@ -526,7 +501,6 @@
         });
     }
     
-    // Прокрутка при клике на пункт меню
     function scrollToSection(sectionId) {
         let targetElement = null;
         if (sectionId === 'home') targetElement = homeSection;
@@ -534,20 +508,18 @@
         else if (sectionId === 'contact') targetElement = contactSection;
         
         if (targetElement) {
-            const offset = 80; // высота навбара + отступ
+            const offset = 80;
             const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
             window.scrollTo({
                 top: elementPosition - offset,
                 behavior: 'smooth'
             });
-            // Небольшая задержка, чтобы классы успели обновиться после скролла
             setTimeout(() => {
                 updateActiveNav();
             }, 150);
         }
     }
     
-    // Добавляем обработчики клика
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
             const sectionName = item.getAttribute('data-section');
@@ -555,13 +527,11 @@
         });
     });
     
-    // Обновление активного пункта при прокрутке + начальная установка
     window.addEventListener('scroll', () => {
         requestAnimationFrame(updateActiveNav);
     });
     window.addEventListener('load', () => {
         updateActiveNav();
-        // Дополнительно: активный пункт совпадает с видимой областью
     });
     updateActiveNav();
 </script>
