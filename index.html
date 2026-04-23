@@ -2,108 +2,199 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Цветы - размеры и положение</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Цветы | Касание и наведение</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent; /* убирает серый фон при тапе на телефонах */
         }
 
         body {
             background-color: #ffffff;
             min-height: 100vh;
-            padding: 40px 30px;
+            padding: 30px 20px;
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Основной контейнер */
-        .wrapper {
-            max-width: 1400px;
+        /* Основной контейнер — максимальная ширина, но для телефонов резина */
+        .container {
+            width: 100%;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
-        /* Верхняя строка: слева цветы1, справа цветы3 (уменьшена в 2 раза + прижата к правому краю) */
+        /* Верхняя строка: цветы1 СЛЕВА (ещё ближе к левому краю) и цветы3 СПРАВА (в 2 раза меньше) */
         .top-row {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 60px;
             flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 70px;
         }
 
-        /* Левая часть — цветы1 (оригинальный размер) */
-        .flower1-area {
+        /* ----- БЛОК ЦВЕТЫ1: прижат к самому левому краю ----- */
+        .flower-left {
             flex: 1;
             text-align: left;
+            /* убираем все отступы внутри, чтобы картинка максимально прижалась влево */
+            margin-left: -8px;  /* небольшой доводчик, чтобы убрать возможные внутренние отступы и прижать еще плотнее к левому краю */
         }
-        .flower1-area img {
+        /* на совсем маленьких экранах корректируем, чтобы не уезжало за экран */
+        @media (max-width: 600px) {
+            .flower-left {
+                margin-left: -5px;
+            }
+        }
+
+        /* БЛОК ЦВЕТЫ3: прижат к правому краю, картинка уменьшена в 2 раза */
+        .flower-right {
+            flex: 1;
+            text-align: right;
+            margin-right: -8px;  /* прижимаем к правому краю плотнее */
+        }
+        @media (max-width: 600px) {
+            .flower-right {
+                margin-right: -5px;
+            }
+        }
+
+        /* Сами изображения — общие стили + плавное увеличение */
+        img {
+            display: inline-block;
             max-width: 100%;
             height: auto;
-            display: block;
-        }
-
-        /* Правая часть — цветы3: уменьшен в 2 раза и прижат к правому краю */
-        .flower3-area {
-            flex: 1;
-            text-align: right;   /* прижимаем содержимое к правому краю */
-        }
-        .flower3-area img {
-            width: 50%;           /* в 2 раза меньше (50% от родительского контейнера) */
-            height: auto;
-            display: inline-block;
-        }
-
-        /* Нижняя центральная часть — цветы4: в 3 раза меньше + центрирование */
-        .flower4-area {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .flower4-area img {
-            width: 33.333%;       /* ровно в 3 раза меньше от ширины контейнера */
-            height: auto;
-            display: inline-block;
-        }
-
-        /* Адаптивность: на маленьких экранах вся структура сохраняется, 
-           но относительные размеры остаются (50% и 33%) */
-        @media (max-width: 800px) {
-            body {
-                padding: 25px 20px;
-            }
-            .flower3-area img {
-                width: 60%;      /* чуть больше на узких экранах, но сохраняем пропорцию ~в 2 раза */
-            }
-            .flower4-area img {
-                width: 45%;
-            }
-        }
-
-        /* Доп. защита: никакого лишнего текста, рамок, теней */
-        img {
-            border: none;
-            background: transparent;
+            transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            will-change: transform;
+            cursor: pointer;
+            border-radius: 0;      /* без скруглений, строго фото */
             box-shadow: none;
+            -webkit-backface-visibility: hidden;
+        }
+
+        /* ЦВЕТЫ1 (слева) — оригинальный размер, НО при наведении/тапе увеличивается */
+        .flower-left img {
+            width: auto;
+            max-width: 100%;
+            transform-origin: left center;  /* увеличение от левого края — приятный эффект */
+        }
+
+        /* ЦВЕТЫ3 (справа) — уменьшен в 2 раза (50% от ширины родителя) */
+        .flower-right img {
+            width: 50%;
+            max-width: 50%;
+            transform-origin: right center; /* увеличение от правого края */
+        }
+
+        /* ЦВЕТЫ4 (в центре, уменьшен в 3 раза) */
+        .flower-center {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .flower-center img {
+            width: 33.333%;       /* ровно в 3 раза меньше */
+            max-width: 33.333%;
+            transform-origin: center center;
+        }
+
+        /* ---------- ЭФФЕКТ УВЕЛИЧЕНИЯ ПРИ НАВЕДЕНИИ МЫШКОЙ ИЛИ ТАПЕ (на телефонах) ---------- */
+        @media (hover: hover) {
+            /* Для устройств с мышкой: наведение увеличивает */
+            .flower-left img:hover,
+            .flower-right img:hover,
+            .flower-center img:hover {
+                transform: scale(1.08);
+            }
+        }
+
+        /* Для сенсорных экранов (телефоны, планшеты): при касании (active) картинка увеличивается.
+           Также сохраняется при нажатии и удержании. */
+        .flower-left img:active,
+        .flower-right img:active,
+        .flower-center img:active {
+            transform: scale(1.08);
+            transition: transform 0.1s ease;
+        }
+
+        /* Дополнительно: если пользователь просто кликает — эффект остаётся приятным.
+           Чтобы на телефонах не было "прилипания", но увеличение срабатывает на tap */
+        
+        /* Оптимизация под телефоны: убираем лишние отступы, делаем удобную область нажатия */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 12px;
+            }
+            .top-row {
+                gap: 25px;
+                margin-bottom: 45px;
+            }
+            /* на телефонах цветы1 прижат максимально влево, цветы3 — вправо */
+            .flower-left {
+                margin-left: -3px;
+            }
+            .flower-right {
+                margin-right: -3px;
+            }
+            /* увеличиваем зону нажатия через padding (около картинок) */
+            .flower-left, .flower-right, .flower-center {
+                padding: 4px 0;
+            }
+            /* эффект увеличения для телефонов — срабатывает на tap.active */
+            .flower-left img:active,
+            .flower-right img:active,
+            .flower-center img:active {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Очень маленькие телефоны (ширина до 480px) */
+        @media (max-width: 480px) {
+            .flower-right img {
+                width: 55%;   /* чуть крупнее, чтобы сохранить читаемость, но все еще ~ в 2 раза меньше оригинала */
+                max-width: 55%;
+            }
+            .flower-center img {
+                width: 40%;    /* адаптация под узкий экран, но визуально меньше в ≈2.5 раза от ширины (ощущается меньше) */
+                max-width: 40%;
+            }
+            .flower-left img {
+                max-width: 95%;
+            }
+        }
+
+        /* Дополнительная полировка: чтобы при увеличении картинки не вылезали за границы */
+        .flower-left, .flower-right, .flower-center {
+            overflow: visible;
+        }
+
+        /* Никакого текста, подписей, рамок или фоновых элементов */
+        a, button, span, p, h1, h2, div:not(.container):not(.top-row):not(.flower-left):not(.flower-right):not(.flower-center) {
+            /* ничего лишнего не выводим */
         }
     </style>
 </head>
 <body>
-<div class="wrapper">
-    <!-- Верхний ряд: слева ЦВЕТЫ1, справа ЦВЕТЫ3 (уменьшен в 2 раза, прижат вправо) -->
+<div class="container">
+    <!-- Верхняя строка: цветы1 максимально слева + цветы3 максимально справа (уменьшена в 2 раза) -->
     <div class="top-row">
-        <div class="flower1-area">
-            <!-- фотка цветы1.png оригинальный размер -->
+        <div class="flower-left">
+            <!-- Фотка "цветы1.png" из той же папки, прижата к левому краю -->
             <img src="цветы1.png" alt="цветы1">
         </div>
-        <div class="flower3-area">
-            <!-- цветы3.png уменьшен в 2 раза (width:50%) и находится у правого края -->
+        <div class="flower-right">
+            <!-- Фотка "цветы3.png" прижата к правому краю, уменьшена в 2 раза -->
             <img src="цветы3.png" alt="цветы3">
         </div>
     </div>
 
-    <!-- Ниже по центру: ЦВЕТЫ4, уменьшен в 3 раза (33.333%) -->
-    <div class="flower4-area">
+    <!-- Нижняя часть: цветы4 по центру, уменьшена в 3 раза -->
+    <div class="flower-center">
         <img src="цветы4.png" alt="цветы4">
     </div>
 </div>
