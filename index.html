@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Цветы</title>
+    <title>Цветы - размеры и положение</title>
     <style>
         * {
             margin: 0;
@@ -14,85 +14,96 @@
         body {
             background-color: #ffffff;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
+            padding: 40px 30px;
         }
 
-        /* Контейнер */
-        .container {
-            width: 100%;
-            max-width: 1300px;
+        /* Основной контейнер */
+        .wrapper {
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        /* Верхняя строка: слева и справа */
+        /* Верхняя строка: слева цветы1, справа цветы3 (уменьшена в 2 раза + прижата к правому краю) */
         .top-row {
             display: flex;
             justify-content: space-between;
-            gap: 40px;
+            align-items: flex-start;
             flex-wrap: wrap;
-            margin-bottom: 60px;
+            gap: 30px;
+            margin-bottom: 70px;
         }
 
-        .left {
+        /* Левая часть — цветы1 (оригинальный размер) */
+        .flower1-area {
             flex: 1;
             text-align: left;
-            min-width: 200px;
         }
-
-        .right {
-            flex: 1;
-            text-align: right;
-            min-width: 200px;
-        }
-
-        /* Нижний центр */
-        .center-bottom {
-            text-align: center;
-        }
-
-        /* Стили картинок */
-        img {
+        .flower1-area img {
             max-width: 100%;
             height: auto;
-            display: inline-block;
-            border-radius: 0;
-            box-shadow: none;
+            display: block;
         }
 
-        /* На мобилках: лево и право по центру */
-        @media (max-width: 700px) {
-            .top-row {
-                flex-direction: column;
-                align-items: center;
-                gap: 40px;
+        /* Правая часть — цветы3: уменьшен в 2 раза и прижат к правому краю */
+        .flower3-area {
+            flex: 1;
+            text-align: right;   /* прижимаем содержимое к правому краю */
+        }
+        .flower3-area img {
+            width: 50%;           /* в 2 раза меньше (50% от родительского контейнера) */
+            height: auto;
+            display: inline-block;
+        }
+
+        /* Нижняя центральная часть — цветы4: в 3 раза меньше + центрирование */
+        .flower4-area {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .flower4-area img {
+            width: 33.333%;       /* ровно в 3 раза меньше от ширины контейнера */
+            height: auto;
+            display: inline-block;
+        }
+
+        /* Адаптивность: на маленьких экранах вся структура сохраняется, 
+           но относительные размеры остаются (50% и 33%) */
+        @media (max-width: 800px) {
+            body {
+                padding: 25px 20px;
             }
-            .left, .right {
-                text-align: center;
-                width: 100%;
+            .flower3-area img {
+                width: 60%;      /* чуть больше на узких экранах, но сохраняем пропорцию ~в 2 раза */
             }
+            .flower4-area img {
+                width: 45%;
+            }
+        }
+
+        /* Доп. защита: никакого лишнего текста, рамок, теней */
+        img {
+            border: none;
+            background: transparent;
+            box-shadow: none;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <!-- Верхняя часть: слева цветы1, справа цветы3 -->
+<div class="wrapper">
+    <!-- Верхний ряд: слева ЦВЕТЫ1, справа ЦВЕТЫ3 (уменьшен в 2 раза, прижат вправо) -->
     <div class="top-row">
-        <div class="left">
-            <!-- Фотка цветы1.png из той же папки -->
+        <div class="flower1-area">
+            <!-- фотка цветы1.png оригинальный размер -->
             <img src="цветы1.png" alt="цветы1">
         </div>
-        <div class="right">
-            <!-- Фотка цветы3.png из той же папки -->
+        <div class="flower3-area">
+            <!-- цветы3.png уменьшен в 2 раза (width:50%) и находится у правого края -->
             <img src="цветы3.png" alt="цветы3">
         </div>
     </div>
 
-    <!-- Ниже в центре: цветы4 -->
-    <div class="center-bottom">
+    <!-- Ниже по центру: ЦВЕТЫ4, уменьшен в 3 раза (33.333%) -->
+    <div class="flower4-area">
         <img src="цветы4.png" alt="цветы4">
     </div>
 </div>
