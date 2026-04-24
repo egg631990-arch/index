@@ -217,7 +217,7 @@
             background: transparent;
         }
 
-        /* ===== БОЛЬШОЙ ЧЕРНЫЙ ПРЯМОУГОЛЬНИК #232333 С МЕНЮ ===== */
+        /* ===== БОЛЬШОЙ ЧЕРНЫЙ ПРЯМОУГОЛЬНИК #232333 ===== */
         .big-footer-rect {
             width: 100%;
             background-color: #232333;
@@ -225,6 +225,7 @@
             margin-top: 60px;
         }
 
+        /* Гибкая сетка: на телефонах пункты идут горизонтально в строку и переносятся */
         .footer-container {
             max-width: 1300px;
             margin: 0 auto;
@@ -235,12 +236,14 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        .footer-col {
+        /* Каждая группа (О нас, Клиентам, Связь) — это отдельный блок, который на телефонах не растягивается в колонку, 
+           а остается рядом за счет flex-wrap. Внутри каждой группы пункты тоже flex */
+        .footer-group {
             flex: 1;
             min-width: 180px;
         }
 
-        .footer-col h4 {
+        .footer-group h4 {
             color: #ffc6d3;
             font-size: 1.1rem;
             font-weight: 600;
@@ -250,24 +253,26 @@
             padding-left: 10px;
         }
 
-        .footer-col a, .footer-col .footer-item {
-            display: block;
+        /* Список пунктов внутри группы — flex-колонка по умолчанию, но на телефонах пункты остаются вертикально внутри своей группы,
+           а сами группы располагаются горизонтально рядом. Чтобы было как на ПК: три блока рядом */
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-links a, .footer-links .footer-item {
             color: #e0e0e0;
             font-size: 0.85rem;
             text-decoration: none;
-            margin-bottom: 10px;
             transition: 0.2s;
             cursor: pointer;
-            font-weight: 400;
+            display: block;
         }
 
-        .footer-col a:hover, .footer-col .footer-item:hover {
+        .footer-links a:hover, .footer-links .footer-item:hover {
             color: #ffb6c7;
             transform: translateX(3px);
-        }
-
-        .contact-footer {
-            margin-top: 10px;
         }
 
         .contact-footer .phone-foot {
@@ -289,32 +294,41 @@
             margin: 12px 0 6px 0;
         }
 
-        /* Адаптив */
-        @media (max-width: 900px) {
-            .footer-container {
-                flex-direction: column;
-                gap: 30px;
-            }
-            .footer-col {
-                width: 100%;
-            }
-        }
-
+        /* Адаптив: на телефонах три блока идут в строку (переносятся, но каждый занимает авто-ширину) */
         @media (max-width: 768px) {
-            .navbar { padding: 6px 12px; }
-            .nav-container { gap: 32px; }
-            .nav-item { font-size: 0.9rem; }
-            .nav-item.active { font-size: 1.1rem; }
-            .flower-left { margin-left: -25px; }
-            .flower-left img { margin-left: -20px; }
-            .flower-right img { width: 52%; }
-            .flower-center img { width: 40%; }
-            .main-title { font-size: 42px; }
-            .subtitle { font-size: 20px; }
-            .text-block { margin: 30px 15px 40px; }
-            .big-footer-rect { padding: 35px 20px; margin-top: 40px; }
+            .footer-container {
+                gap: 30px;
+                justify-content: flex-start;
+            }
+            .footer-group {
+                flex: 0 1 auto;   /* не растягиваются, а занимают место по содержимому */
+                min-width: 140px;
+            }
+            .big-footer-rect {
+                padding: 35px 20px;
+            }
         }
 
+        @media (max-width: 550px) {
+            .footer-container {
+                gap: 25px;
+                justify-content: space-between;
+            }
+            .footer-group {
+                min-width: 130px;
+            }
+            .footer-group h4 {
+                font-size: 1rem;
+            }
+            .footer-links a, .footer-links .footer-item {
+                font-size: 0.75rem;
+            }
+            .contact-footer .phone-foot {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* на очень узких экранах блоки будут переноситься, но оставаться рядом */
         @media (max-width: 480px) {
             .flower-left { margin-left: -30px; }
             .flower-left img { margin-left: -22px; }
@@ -322,7 +336,10 @@
             .flower-center img { width: 45%; }
             .main-title { font-size: 32px; }
             .subtitle { font-size: 18px; }
-            .big-footer-rect { padding: 25px 15px; margin-top: 30px; }
+            .big-footer-rect { padding: 30px 15px; margin-top: 30px; }
+            .footer-container {
+                gap: 20px;
+            }
         }
 
         @media (min-width: 1024px) {
@@ -377,35 +394,41 @@
     <section id="contact-section" class="section"></section>
 </div>
 
-<!-- БОЛЬШОЙ ПРЯМОУГОЛЬНИК #232333 С ВСЕМИ ПУНКТАМИ -->
+<!-- БОЛЬШОЙ ПРЯМОУГОЛЬНИК #232333 С ПУНКТАМИ (ТЕЛЕФОН: БЛОКИ РЯДОМ) -->
 <div class="big-footer-rect">
     <div class="footer-container">
-        <!-- Колонка "О нас" -->
-        <div class="footer-col">
+        <!-- Группа "О нас" -->
+        <div class="footer-group">
             <h4>О нас</h4>
-            <div class="footer-item">О нас</div>
-            <div class="footer-item">Доставка</div>
-            <div class="footer-item">Оплата</div>
-            <div class="footer-item">Соц Сети</div>
+            <div class="footer-links">
+                <div class="footer-item">О нас</div>
+                <div class="footer-item">Доставка</div>
+                <div class="footer-item">Оплата</div>
+                <div class="footer-item">Соц Сети</div>
+            </div>
         </div>
 
-        <!-- Колонка "Клиентам" -->
-        <div class="footer-col">
+        <!-- Группа "Клиентам" -->
+        <div class="footer-group">
             <h4>Клиентам</h4>
-            <div class="footer-item">Контакты</div>
-            <div class="footer-item">Помощь</div>
-            <div class="footer-item">Политика конфидициальности</div>
-            <div class="footer-item">Условия покупки</div>
-            <div class="footer-item">Помощь по букетам</div>
-            <div class="footer-item">Скидки</div>
+            <div class="footer-links">
+                <div class="footer-item">Контакты</div>
+                <div class="footer-item">Помощь</div>
+                <div class="footer-item">Политика конфидициальности</div>
+                <div class="footer-item">Условия покупки</div>
+                <div class="footer-item">Помощь по букетам</div>
+                <div class="footer-item">Скидки</div>
+            </div>
         </div>
 
-        <!-- Колонка "Связь" -->
-        <div class="footer-col">
+        <!-- Группа "Связь" -->
+        <div class="footer-group">
             <h4>Связь</h4>
-            <div class="phone-foot">+790000000000</div>
-            <div class="sub-contact-foot">Вопросы/сотрудничество</div>
-            <div class="mail-foot">gmail@gmail.com</div>
+            <div class="footer-links contact-footer">
+                <div class="phone-foot">+790000000000</div>
+                <div class="sub-contact-foot">Вопросы/сотрудничество</div>
+                <div class="mail-foot">gmail@gmail.com</div>
+            </div>
         </div>
     </div>
 </div>
