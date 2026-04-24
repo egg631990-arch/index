@@ -156,8 +156,8 @@
 
         .text-block {
             text-align: center;
-            margin: 40px 20px 50px 20px;
-            padding: 15px 0;
+            margin: 40px 20px 30px 20px;
+            padding: 15px 0 0 0;
         }
 
         .main-title {
@@ -183,6 +183,56 @@
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
+        }
+
+        /* ===== НОВЫЕ КНОПКИ КАТАЛОГ И КОРЗИНА ===== */
+        .buttons-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 20px 50px 20px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 12px 32px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: #f7ede8;
+            color: #b45f3b;
+            letter-spacing: 0.03em;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        /* Анимация при наведении */
+        .action-btn:hover {
+            transform: translateY(-4px);
+            background: #ffdfd0;
+            box-shadow: 0 8px 18px rgba(180, 95, 59, 0.2);
+        }
+
+        /* Анимация при нажатии */
+        .action-btn:active {
+            transform: scale(0.96);
+            transition: transform 0.08s ease;
+        }
+
+        /* Разные цвета для двух кнопок — но без лишнего, просто акцент */
+        .btn-catalog {
+            background: #ffe0d4;
+            color: #9b4a2a;
+            border: 1px solid #ffcdb5;
+        }
+
+        .btn-cart {
+            background: #ffd9c4;
+            color: #8b3e1f;
+            border: 1px solid #ffba93;
         }
 
         /* Дрожание */
@@ -225,7 +275,6 @@
             margin-top: 60px;
         }
 
-        /* Гибкая сетка: на телефонах пункты идут горизонтально в строку как на ПК */
         .footer-container {
             max-width: 1300px;
             margin: 0 auto;
@@ -290,7 +339,7 @@
             margin: 8px 0 4px 0;
         }
 
-        /* ===== ПЛАВАЮЩАЯ КНОПКА "ПОМОЩЬ" (PNG) ПОДНЯТА В 4 РАЗА ВЫШЕ ===== */
+        /* ===== ПЛАВАЮЩАЯ КНОПКА "ПОМОЩЬ" ===== */
         .help-button {
             position: fixed;
             bottom: 120px;
@@ -309,7 +358,6 @@
             filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
         }
 
-        /* Анимация при нажатии — просто мигание/увеличение */
         .help-button:active {
             animation: helpClick 0.2s ease-in-out;
         }
@@ -320,7 +368,7 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* Адаптив для телефонов: кнопка выше, пункты в футере горизонтально */
+        /* Адаптив */
         @media (max-width: 768px) {
             .navbar { padding: 6px 12px; }
             .nav-container { gap: 32px; }
@@ -332,45 +380,22 @@
             .flower-center img { width: 40%; }
             .main-title { font-size: 42px; }
             .subtitle { font-size: 20px; }
-            .text-block { margin: 30px 15px 40px; }
+            .text-block { margin: 30px 15px 20px; }
+            .buttons-row { gap: 20px; margin: 20px 15px 40px; }
+            .action-btn { padding: 10px 24px; font-size: 1rem; }
             .big-footer-rect { padding: 35px 20px; margin-top: 40px; }
-            
-            /* Телефоны: футер горизонтально */
-            .footer-container {
-                gap: 30px;
-                justify-content: flex-start;
-            }
-            .footer-group {
-                min-width: 130px;
-            }
-            
-            .help-button {
-                width: 65px;
-                height: 65px;
-                bottom: 130px;
-                right: 15px;
-            }
+            .footer-container { gap: 30px; }
+            .footer-group { min-width: 130px; }
+            .help-button { width: 65px; height: 65px; bottom: 130px; right: 15px; }
         }
 
         @media (max-width: 550px) {
-            .footer-container {
-                gap: 25px;
-            }
-            .footer-group {
-                min-width: 120px;
-            }
-            .footer-group h4 {
-                font-size: 0.85rem;
-            }
-            .footer-links .footer-item {
-                font-size: 0.7rem;
-            }
-            .help-button {
-                width: 55px;
-                height: 55px;
-                bottom: 120px;
-                right: 12px;
-            }
+            .footer-container { gap: 25px; }
+            .footer-group { min-width: 120px; }
+            .footer-group h4 { font-size: 0.85rem; }
+            .footer-links .footer-item { font-size: 0.7rem; }
+            .help-button { width: 55px; height: 55px; bottom: 120px; right: 12px; }
+            .action-btn { padding: 8px 20px; font-size: 0.9rem; }
         }
 
         @media (max-width: 480px) {
@@ -381,9 +406,9 @@
             .main-title { font-size: 32px; }
             .subtitle { font-size: 18px; }
             .big-footer-rect { padding: 30px 15px; margin-top: 30px; }
-            .help-button {
-                bottom: 110px;
-            }
+            .help-button { bottom: 110px; }
+            .buttons-row { gap: 15px; }
+            .action-btn { padding: 7px 18px; font-size: 0.85rem; }
         }
 
         @media (min-width: 1024px) {
@@ -432,13 +457,19 @@
         <div class="flower-center">
             <img src="цветы4.png" alt="цветы4" class="flower-img">
         </div>
+
+        <!-- НОВЫЕ КНОПКИ: КАТАЛОГ И КОРЗИНА -->
+        <div class="buttons-row">
+            <button class="action-btn btn-catalog" id="catalogBtn">Каталог</button>
+            <button class="action-btn btn-cart" id="cartBtn">Корзина</button>
+        </div>
     </section>
 
     <section id="order-section" class="section"></section>
     <section id="contact-section" class="section"></section>
 </div>
 
-<!-- Чёрный прямоугольник внизу с пунктами (на телефонах рядом) -->
+<!-- Чёрный прямоугольник внизу -->
 <div class="big-footer-rect">
     <div class="footer-container">
         <div class="footer-group">
@@ -474,7 +505,7 @@
     </div>
 </div>
 
-<!-- ПЛАВАЮЩАЯ КНОПКА ПОМОЩЬ (PNG) - ПОДНЯТА ВЫШЕ, ПРИ НАЖАТИИ АНИМАЦИЯ -->
+<!-- Плавающая кнопка помощи -->
 <div class="help-button" id="helpButton">
     <img src="помощь.png" alt="помощь" onerror="this.src='https://placehold.co/70x70/ff9eb5/white?text=помощь'">
 </div>
@@ -507,7 +538,7 @@
         }
     });
 
-    // Навигация
+    // Навигация (главная/заказ/контакт)
     const navBtns = document.querySelectorAll('.nav-item');
     const homeSec = document.getElementById('home-section');
     const orderSec = document.getElementById('order-section');
@@ -556,14 +587,25 @@
     updateActive();
     setTimeout(shake, 200);
 
-    // Кнопка помощи: просто анимация при нажатии, никаких окон
+    // Кнопка помощи: анимация
     const helpBtn = document.getElementById('helpButton');
     helpBtn.addEventListener('click', () => {
-        // Анимация уже есть через CSS :active, добавим дополнительный эффект
         helpBtn.style.animation = 'none';
-        setTimeout(() => {
-            helpBtn.style.animation = '';
-        }, 10);
+        setTimeout(() => { helpBtn.style.animation = ''; }, 10);
+    });
+
+    // Кнопки "Каталог" и "Корзина" — просто анимация (без лишних действий)
+    const catalogBtn = document.getElementById('catalogBtn');
+    const cartBtn = document.getElementById('cartBtn');
+    
+    catalogBtn.addEventListener('click', () => {
+        catalogBtn.style.transform = 'scale(0.96)';
+        setTimeout(() => { catalogBtn.style.transform = ''; }, 120);
+    });
+    
+    cartBtn.addEventListener('click', () => {
+        cartBtn.style.transform = 'scale(0.96)';
+        setTimeout(() => { cartBtn.style.transform = ''; }, 120);
     });
 </script>
 </body>
