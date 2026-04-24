@@ -31,7 +31,7 @@
 
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-        /* ===== РОЗОВАЯ ПОЛОСКА (только главная/заказ/контакт) ===== */
+        /* ===== РОЗОВАЯ ПОЛОСКА ===== */
         .navbar {
             background: linear-gradient(95deg, #ff9eb5 0%, #ffe0e8 40%, #ffb6c7 100%);
             padding: 8px 16px;
@@ -217,7 +217,7 @@
             background: transparent;
         }
 
-        /* ===== БОЛЬШОЙ ЧЕРНЫЙ ПРЯМОУГОЛЬНИК #232333 ===== */
+        /* ===== БОЛЬШОЙ ЧЕРНЫЙ ПРЯМОУГОЛЬНИК #232333 (ВСЕГДА ВНИЗУ) ===== */
         .big-footer-rect {
             width: 100%;
             background-color: #232333;
@@ -225,7 +225,6 @@
             margin-top: 60px;
         }
 
-        /* Гибкая сетка: на телефонах пункты идут горизонтально в строку и переносятся */
         .footer-container {
             max-width: 1300px;
             margin: 0 auto;
@@ -236,8 +235,6 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* Каждая группа (О нас, Клиентам, Связь) — это отдельный блок, который на телефонах не растягивается в колонку, 
-           а остается рядом за счет flex-wrap. Внутри каждой группы пункты тоже flex */
         .footer-group {
             flex: 1;
             min-width: 180px;
@@ -253,8 +250,6 @@
             padding-left: 10px;
         }
 
-        /* Список пунктов внутри группы — flex-колонка по умолчанию, но на телефонах пункты остаются вертикально внутри своей группы,
-           а сами группы располагаются горизонтально рядом. Чтобы было как на ПК: три блока рядом */
         .footer-links {
             display: flex;
             flex-direction: column;
@@ -294,41 +289,104 @@
             margin: 12px 0 6px 0;
         }
 
-        /* Адаптив: на телефонах три блока идут в строку (переносятся, но каждый занимает авто-ширину) */
+        /* ===== ПЛАВАЮЩАЯ КНОПКА "ПОМОЩЬ" (PNG) ===== */
+        .help-button {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            z-index: 999;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s;
+            width: 70px;
+            height: 70px;
+        }
+
+        .help-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+        }
+
+        .help-button:hover {
+            transform: scale(1.05);
+        }
+
+        .help-button:active {
+            transform: scale(0.97);
+        }
+
+        /* Всплывающее окно при нажатии */
+        .help-popup {
+            position: fixed;
+            bottom: 110px;
+            right: 25px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 18px 22px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+            min-width: 210px;
+            text-align: center;
+            border: 1px solid #ffcddc;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.2s;
+        }
+
+        .help-popup.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .help-popup p {
+            margin: 8px 0;
+            font-size: 0.9rem;
+            color: #2d2d2a;
+        }
+
+        .help-popup .popup-phone {
+            font-weight: 700;
+            color: #b45f3b;
+            font-size: 1rem;
+        }
+
+        .help-popup .popup-email {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .close-popup {
+            margin-top: 10px;
+            background: #ff9eb5;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+
+        /* Адаптив */
         @media (max-width: 768px) {
-            .footer-container {
-                gap: 30px;
-                justify-content: flex-start;
-            }
-            .footer-group {
-                flex: 0 1 auto;   /* не растягиваются, а занимают место по содержимому */
-                min-width: 140px;
-            }
-            .big-footer-rect {
-                padding: 35px 20px;
-            }
+            .navbar { padding: 6px 12px; }
+            .nav-container { gap: 32px; }
+            .nav-item { font-size: 0.9rem; }
+            .nav-item.active { font-size: 1.1rem; }
+            .flower-left { margin-left: -25px; }
+            .flower-left img { margin-left: -20px; }
+            .flower-right img { width: 52%; }
+            .flower-center img { width: 40%; }
+            .main-title { font-size: 42px; }
+            .subtitle { font-size: 20px; }
+            .text-block { margin: 30px 15px 40px; }
+            .big-footer-rect { padding: 35px 20px; margin-top: 40px; }
+            .help-button { width: 60px; height: 60px; bottom: 20px; right: 15px; }
+            .help-popup { bottom: 95px; right: 20px; padding: 14px 18px; min-width: 190px; }
         }
 
-        @media (max-width: 550px) {
-            .footer-container {
-                gap: 25px;
-                justify-content: space-between;
-            }
-            .footer-group {
-                min-width: 130px;
-            }
-            .footer-group h4 {
-                font-size: 1rem;
-            }
-            .footer-links a, .footer-links .footer-item {
-                font-size: 0.75rem;
-            }
-            .contact-footer .phone-foot {
-                font-size: 0.85rem;
-            }
-        }
-
-        /* на очень узких экранах блоки будут переноситься, но оставаться рядом */
         @media (max-width: 480px) {
             .flower-left { margin-left: -30px; }
             .flower-left img { margin-left: -22px; }
@@ -337,9 +395,8 @@
             .main-title { font-size: 32px; }
             .subtitle { font-size: 18px; }
             .big-footer-rect { padding: 30px 15px; margin-top: 30px; }
-            .footer-container {
-                gap: 20px;
-            }
+            .help-button { width: 55px; height: 55px; bottom: 15px; right: 12px; }
+            .help-popup { bottom: 85px; right: 15px; }
         }
 
         @media (min-width: 1024px) {
@@ -356,7 +413,7 @@
 </head>
 <body>
 
-<!-- Розовая полоска: главная / заказ / контакт -->
+<!-- Розовая полоска -->
 <div class="navbar">
     <div class="nav-container">
         <button class="nav-item" data-section="home">главная</button>
@@ -394,10 +451,9 @@
     <section id="contact-section" class="section"></section>
 </div>
 
-<!-- БОЛЬШОЙ ПРЯМОУГОЛЬНИК #232333 С ПУНКТАМИ (ТЕЛЕФОН: БЛОКИ РЯДОМ) -->
+<!-- Чёрный прямоугольник внизу -->
 <div class="big-footer-rect">
     <div class="footer-container">
-        <!-- Группа "О нас" -->
         <div class="footer-group">
             <h4>О нас</h4>
             <div class="footer-links">
@@ -408,7 +464,6 @@
             </div>
         </div>
 
-        <!-- Группа "Клиентам" -->
         <div class="footer-group">
             <h4>Клиентам</h4>
             <div class="footer-links">
@@ -421,7 +476,6 @@
             </div>
         </div>
 
-        <!-- Группа "Связь" -->
         <div class="footer-group">
             <h4>Связь</h4>
             <div class="footer-links contact-footer">
@@ -433,7 +487,21 @@
     </div>
 </div>
 
+<!-- ПЛАВАЮЩАЯ КНОПКА ПОМОЩЬ (PNG) -->
+<div class="help-button" id="helpButton">
+    <img src="помощь.png" alt="помощь" onerror="this.src='https://placehold.co/70x70/ff9eb5/white?text=?'">
+</div>
+
+<!-- Всплывающее окно -->
+<div class="help-popup" id="helpPopup">
+    <p style="font-weight: 600; color:#b45f3b;">📞 Помощь</p>
+    <p class="popup-phone">+7 900 000-00-00</p>
+    <p class="popup-email">help@flowers.ru</p>
+    <button class="close-popup" id="closePopup">Закрыть</button>
+</div>
+
 <script>
+    // Дрожание фоток
     const images = document.querySelectorAll('.flower-img');
     let ticking = false;
     let lastScroll = window.scrollY;
@@ -460,6 +528,7 @@
         }
     });
 
+    // Навигация
     const navBtns = document.querySelectorAll('.nav-item');
     const homeSec = document.getElementById('home-section');
     const orderSec = document.getElementById('order-section');
@@ -507,6 +576,27 @@
     window.addEventListener('load', updateActive);
     updateActive();
     setTimeout(shake, 200);
+
+    // Кнопка "помощь" - показ/скрытие попапа
+    const helpBtn = document.getElementById('helpButton');
+    const popup = document.getElementById('helpPopup');
+    const closeBtn = document.getElementById('closePopup');
+
+    helpBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        popup.classList.toggle('show');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        popup.classList.remove('show');
+    });
+
+    // Клик вне попапа закрывает
+    document.addEventListener('click', (e) => {
+        if (!helpBtn.contains(e.target) && !popup.contains(e.target)) {
+            popup.classList.remove('show');
+        }
+    });
 </script>
 </body>
 </html>
