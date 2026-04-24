@@ -217,7 +217,7 @@
             background: transparent;
         }
 
-        /* ===== БОЛЬШОЙ ЧЕРНЫЙ ПРЯМОУГОЛЬНИК #232333 (ВСЕГДА ВНИЗУ) ===== */
+        /* ===== ЧЕРНЫЙ ПРЯМОУГОЛЬНИК ВНИЗУ ===== */
         .big-footer-rect {
             width: 100%;
             background-color: #232333;
@@ -225,26 +225,27 @@
             margin-top: 60px;
         }
 
+        /* Гибкая сетка: на телефонах пункты идут горизонтально в строку как на ПК */
         .footer-container {
             max-width: 1300px;
             margin: 0 auto;
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 40px;
+            justify-content: flex-start;
+            gap: 50px;
             font-family: 'Montserrat', sans-serif;
         }
 
         .footer-group {
-            flex: 1;
-            min-width: 180px;
+            flex: 0 1 auto;
+            min-width: 150px;
         }
 
         .footer-group h4 {
             color: #ffc6d3;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             letter-spacing: 0.05em;
             border-left: 3px solid #ff9eb5;
             padding-left: 10px;
@@ -253,52 +254,52 @@
         .footer-links {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
-        .footer-links a, .footer-links .footer-item {
+        .footer-links .footer-item {
             color: #e0e0e0;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-decoration: none;
             transition: 0.2s;
             cursor: pointer;
             display: block;
         }
 
-        .footer-links a:hover, .footer-links .footer-item:hover {
+        .footer-links .footer-item:hover {
             color: #ffb6c7;
             transform: translateX(3px);
         }
 
         .contact-footer .phone-foot {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: #ffd5df;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .contact-footer .mail-foot {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #cbcbcb;
             word-break: break-all;
         }
 
         .sub-contact-foot {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #a0a0b0;
-            margin: 12px 0 6px 0;
+            margin: 8px 0 4px 0;
         }
 
-        /* ===== ПЛАВАЮЩАЯ КНОПКА "ПОМОЩЬ" (PNG) ===== */
+        /* ===== ПЛАВАЮЩАЯ КНОПКА "ПОМОЩЬ" (PNG) ПОДНЯТА В 4 РАЗА ВЫШЕ ===== */
         .help-button {
             position: fixed;
-            bottom: 30px;
+            bottom: 120px;
             right: 20px;
             z-index: 999;
             cursor: pointer;
-            transition: transform 0.2s ease, opacity 0.2s;
             width: 70px;
             height: 70px;
+            transition: transform 0.1s ease;
         }
 
         .help-button img {
@@ -308,68 +309,18 @@
             filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
         }
 
-        .help-button:hover {
-            transform: scale(1.05);
-        }
-
+        /* Анимация при нажатии — просто мигание/увеличение */
         .help-button:active {
-            transform: scale(0.97);
+            animation: helpClick 0.2s ease-in-out;
         }
 
-        /* Всплывающее окно при нажатии */
-        .help-popup {
-            position: fixed;
-            bottom: 110px;
-            right: 25px;
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 18px 22px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            z-index: 1000;
-            font-family: 'Montserrat', sans-serif;
-            min-width: 210px;
-            text-align: center;
-            border: 1px solid #ffcddc;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.2s;
+        @keyframes helpClick {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.25); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        .help-popup.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .help-popup p {
-            margin: 8px 0;
-            font-size: 0.9rem;
-            color: #2d2d2a;
-        }
-
-        .help-popup .popup-phone {
-            font-weight: 700;
-            color: #b45f3b;
-            font-size: 1rem;
-        }
-
-        .help-popup .popup-email {
-            color: #666;
-            font-size: 0.8rem;
-        }
-
-        .close-popup {
-            margin-top: 10px;
-            background: #ff9eb5;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 30px;
-            color: white;
-            font-weight: 500;
-            cursor: pointer;
-            font-size: 0.7rem;
-        }
-
-        /* Адаптив */
+        /* Адаптив для телефонов: кнопка выше, пункты в футере горизонтально */
         @media (max-width: 768px) {
             .navbar { padding: 6px 12px; }
             .nav-container { gap: 32px; }
@@ -383,8 +334,43 @@
             .subtitle { font-size: 20px; }
             .text-block { margin: 30px 15px 40px; }
             .big-footer-rect { padding: 35px 20px; margin-top: 40px; }
-            .help-button { width: 60px; height: 60px; bottom: 20px; right: 15px; }
-            .help-popup { bottom: 95px; right: 20px; padding: 14px 18px; min-width: 190px; }
+            
+            /* Телефоны: футер горизонтально */
+            .footer-container {
+                gap: 30px;
+                justify-content: flex-start;
+            }
+            .footer-group {
+                min-width: 130px;
+            }
+            
+            .help-button {
+                width: 65px;
+                height: 65px;
+                bottom: 130px;
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .footer-container {
+                gap: 25px;
+            }
+            .footer-group {
+                min-width: 120px;
+            }
+            .footer-group h4 {
+                font-size: 0.85rem;
+            }
+            .footer-links .footer-item {
+                font-size: 0.7rem;
+            }
+            .help-button {
+                width: 55px;
+                height: 55px;
+                bottom: 120px;
+                right: 12px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -395,8 +381,9 @@
             .main-title { font-size: 32px; }
             .subtitle { font-size: 18px; }
             .big-footer-rect { padding: 30px 15px; margin-top: 30px; }
-            .help-button { width: 55px; height: 55px; bottom: 15px; right: 12px; }
-            .help-popup { bottom: 85px; right: 15px; }
+            .help-button {
+                bottom: 110px;
+            }
         }
 
         @media (min-width: 1024px) {
@@ -451,7 +438,7 @@
     <section id="contact-section" class="section"></section>
 </div>
 
-<!-- Чёрный прямоугольник внизу -->
+<!-- Чёрный прямоугольник внизу с пунктами (на телефонах рядом) -->
 <div class="big-footer-rect">
     <div class="footer-container">
         <div class="footer-group">
@@ -487,17 +474,9 @@
     </div>
 </div>
 
-<!-- ПЛАВАЮЩАЯ КНОПКА ПОМОЩЬ (PNG) -->
+<!-- ПЛАВАЮЩАЯ КНОПКА ПОМОЩЬ (PNG) - ПОДНЯТА ВЫШЕ, ПРИ НАЖАТИИ АНИМАЦИЯ -->
 <div class="help-button" id="helpButton">
-    <img src="помощь.png" alt="помощь" onerror="this.src='https://placehold.co/70x70/ff9eb5/white?text=?'">
-</div>
-
-<!-- Всплывающее окно -->
-<div class="help-popup" id="helpPopup">
-    <p style="font-weight: 600; color:#b45f3b;">📞 Помощь</p>
-    <p class="popup-phone">+7 900 000-00-00</p>
-    <p class="popup-email">help@flowers.ru</p>
-    <button class="close-popup" id="closePopup">Закрыть</button>
+    <img src="помощь.png" alt="помощь" onerror="this.src='https://placehold.co/70x70/ff9eb5/white?text=помощь'">
 </div>
 
 <script>
@@ -577,25 +556,14 @@
     updateActive();
     setTimeout(shake, 200);
 
-    // Кнопка "помощь" - показ/скрытие попапа
+    // Кнопка помощи: просто анимация при нажатии, никаких окон
     const helpBtn = document.getElementById('helpButton');
-    const popup = document.getElementById('helpPopup');
-    const closeBtn = document.getElementById('closePopup');
-
-    helpBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        popup.classList.toggle('show');
-    });
-
-    closeBtn.addEventListener('click', () => {
-        popup.classList.remove('show');
-    });
-
-    // Клик вне попапа закрывает
-    document.addEventListener('click', (e) => {
-        if (!helpBtn.contains(e.target) && !popup.contains(e.target)) {
-            popup.classList.remove('show');
-        }
+    helpBtn.addEventListener('click', () => {
+        // Анимация уже есть через CSS :active, добавим дополнительный эффект
+        helpBtn.style.animation = 'none';
+        setTimeout(() => {
+            helpBtn.style.animation = '';
+        }, 10);
     });
 </script>
 </body>
