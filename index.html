@@ -317,9 +317,10 @@
             margin: 8px 0 4px 0;
         }
 
+        /* ===== ПЛАВАЮЩАЯ КНОПКА "ПОМОЩЬ" (ПРАВЫЙ УГОЛ, ЧУТЬ НИЖЕ, ВСЕГДА ПРИ СКРОЛЛЕ) ===== */
         .help-button {
             position: fixed;
-            bottom: 120px;
+            bottom: 30px;
             right: 20px;
             z-index: 999;
             cursor: pointer;
@@ -341,7 +342,7 @@
 
         @keyframes helpClick {
             0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.25); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 0.8; }
             100% { transform: scale(1); opacity: 1; }
         }
 
@@ -362,7 +363,7 @@
             .big-footer-rect { padding: 35px 20px; margin-top: 40px; }
             .footer-container { gap: 30px; }
             .footer-group { min-width: 130px; }
-            .help-button { width: 65px; height: 65px; bottom: 130px; right: 15px; }
+            .help-button { width: 65px; height: 65px; bottom: 25px; right: 15px; }
         }
 
         @media (max-width: 550px) {
@@ -370,7 +371,7 @@
             .footer-group { min-width: 120px; }
             .footer-group h4 { font-size: 0.85rem; }
             .footer-links .footer-item { font-size: 0.7rem; }
-            .help-button { width: 55px; height: 55px; bottom: 120px; right: 12px; }
+            .help-button { width: 55px; height: 55px; bottom: 20px; right: 12px; }
             .action-btn { padding: 16px 35px; font-size: 1.4rem; }
         }
 
@@ -382,7 +383,7 @@
             .main-title { font-size: 32px; }
             .subtitle { font-size: 18px; }
             .big-footer-rect { padding: 30px 15px; margin-top: 30px; }
-            .help-button { bottom: 110px; }
+            .help-button { bottom: 18px; width: 50px; height: 50px; }
             .action-btn { padding: 14px 28px; font-size: 1.2rem; border-radius: 50px; }
         }
 
@@ -559,6 +560,7 @@
     helpBtn.addEventListener('click', () => {
         helpBtn.style.animation = 'none';
         setTimeout(() => { helpBtn.style.animation = ''; }, 10);
+        alert('Свяжитесь с нами: +7 900 000-00-00');
     });
 
     const catalogBtn = document.getElementById('catalogBtn');
