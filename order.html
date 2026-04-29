@@ -1,1 +1,77 @@
+<!-- order.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Каталог</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
+        body {
+            min-height: 100vh;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .help-button {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            z-index: 999;
+            cursor: pointer;
+            width: 70px;
+            height: 70px;
+            transition: transform 0.1s ease;
+        }
+
+        .help-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+        }
+
+        .help-button:active {
+            animation: helpClick 0.2s ease-in-out;
+        }
+
+        @keyframes helpClick {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .help-button { width: 65px; height: 65px; bottom: 25px; right: 15px; }
+        }
+
+        @media (max-width: 550px) {
+            .help-button { width: 55px; height: 55px; bottom: 20px; right: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .help-button { width: 50px; height: 50px; bottom: 18px; right: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="help-button" id="helpButton">
+        <img src="помощь.png" alt="помощь" onerror="this.src='https://placehold.co/70x70/ff9eb5/white?text=?'">
+    </div>
+
+    <script>
+        const helpBtn = document.getElementById('helpButton');
+        helpBtn.addEventListener('click', () => {
+            helpBtn.style.animation = 'none';
+            setTimeout(() => { helpBtn.style.animation = ''; }, 10);
+            alert('Свяжитесь с нами: +7 900 000-00-00');
+        });
+    </script>
+</body>
+</html>
