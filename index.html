@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -346,6 +345,44 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 25px;
+            max-width: 350px;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            color: #2d2d2a;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .modal-content p {
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .close-modal {
+            background: #ff9eb5;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
         @media (max-width: 768px) {
             .navbar { padding: 6px 12px; }
             .nav-container { gap: 32px; }
@@ -469,7 +506,7 @@
         <div class="footer-group">
             <h4>Связь</h4>
             <div class="footer-links contact-footer">
-                <div class="phone-foot">+790000000000</div>
+                <div class="phone-foot">+79022500833</div>
                 <div class="sub-contact-foot">Вопросы/сотрудничество</div>
                 <div class="mail-foot">gmail@gmail.com</div>
             </div>
@@ -479,6 +516,13 @@
 
 <div class="help-button" id="helpButton">
     <img src="помощь.png" alt="помощь" onerror="this.src='https://placehold.co/70x70/ff9eb5/white?text=?'">
+</div>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <p>📱 Напишите нам в WhatsApp по номеру <strong>+79022500833</strong><br><br>✈️ или напишите нам в Telegram <strong>@0000</strong><br><br>чтобы обсудить все детали</p>
+        <button class="close-modal">Закрыть</button>
+    </div>
 </div>
 
 <script>
@@ -560,7 +604,7 @@
     helpBtn.addEventListener('click', () => {
         helpBtn.style.animation = 'none';
         setTimeout(() => { helpBtn.style.animation = ''; }, 10);
-        alert('Свяжитесь с нами: +7 900 000-00-00');
+        alert('Свяжитесь с нами: +7 900 225-08-33');
     });
 
     const catalogBtn = document.getElementById('catalogBtn');
@@ -568,6 +612,19 @@
         window.location.href = 'order.html';
         catalogBtn.style.transform = 'scale(0.97)';
         setTimeout(() => { catalogBtn.style.transform = ''; }, 120);
+    });
+
+    // Модальное окно
+    const modal = document.getElementById('modal');
+    const closeModal = document.querySelector('.close-modal');
+    window.showModal = function() {
+        modal.style.display = 'flex';
+    }
+    closeModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) modal.style.display = 'none';
     });
 </script>
 </body>
