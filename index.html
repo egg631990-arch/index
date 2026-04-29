@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -317,7 +318,6 @@
             margin: 8px 0 4px 0;
         }
 
-        /* ===== ПЛАВАЮЩАЯ КНОПКА "ПОМОЩЬ" (ПРАВЫЙ УГОЛ, ЧУТЬ НИЖЕ, ВСЕГДА ПРИ СКРОЛЛЕ) ===== */
         .help-button {
             position: fixed;
             bottom: 30px;
@@ -565,77 +565,7 @@
 
     const catalogBtn = document.getElementById('catalogBtn');
     catalogBtn.addEventListener('click', () => {
-        const supportPage = `<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Поддержка</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            min-height: 100vh;
-            background: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-        .support-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 20px;
-            width: 70px;
-            height: 70px;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            border: none;
-            background: transparent;
-            padding: 0;
-            z-index: 999;
-        }
-        .support-btn img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
-        }
-        .support-btn:hover {
-            transform: scale(1.08);
-        }
-        .support-btn:active {
-            transform: scale(0.95);
-        }
-        @media (max-width: 768px) {
-            .support-btn { width: 65px; height: 65px; bottom: 25px; right: 15px; }
-        }
-        @media (max-width: 550px) {
-            .support-btn { width: 55px; height: 55px; bottom: 20px; right: 12px; }
-        }
-        @media (max-width: 480px) {
-            .support-btn { width: 50px; height: 50px; bottom: 18px; right: 12px; }
-        }
-    </style>
-</head>
-<body>
-    <button class="support-btn" id="supportBtn">
-        <img src="помощь.png" alt="поддержка" onerror="this.src='https://placehold.co/70x70/ff9eb5/white?text=?'">
-    </button>
-    <script>
-        document.getElementById('supportBtn').addEventListener('click', () => {
-            alert('Свяжитесь с нами: +7 900 000-00-00');
-        });
-    <\/script>
-</body>
-</html>`;
-        const blob = new Blob([supportPage], {type: 'text/html'});
-        const url = URL.createObjectURL(blob);
-        window.open(url, '_blank');
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        window.location.href = 'order.html';
         catalogBtn.style.transform = 'scale(0.97)';
         setTimeout(() => { catalogBtn.style.transform = ''; }, 120);
     });
