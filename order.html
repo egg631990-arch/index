@@ -17,12 +17,12 @@
             min-height: 100vh;
             background: #ffffff;
             font-family: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
-            position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-        /* Верхняя полоска */
         .top-bar {
             background: linear-gradient(95deg, #ff9eb5 0%, #ffe0e8 40%, #ffb6c7 100%);
             padding: 16px 20px;
@@ -32,6 +32,9 @@
             flex-wrap: wrap;
             gap: 15px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .site-title {
@@ -66,20 +69,70 @@
             transform: scale(0.96);
         }
 
-        /* Центральное сообщение */
-        .center-message {
+        .product-card {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            min-height: calc(100vh - 80px);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            color: #d4b48c;
-            text-align: center;
+            justify-content: center;
             padding: 40px 20px;
+            flex: 1;
         }
 
-        /* Кнопка помощи */
+        .product-image {
+            width: 300px;
+            max-width: 80%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-image:hover {
+            transform: scale(1.02);
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2d2d2a;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #b87c5a;
+            margin-bottom: 25px;
+        }
+
+        .buy-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: #ff9eb5;
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(255, 105, 130, 0.3);
+        }
+
+        .buy-btn:hover {
+            background: #ff85a0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 105, 130, 0.4);
+        }
+
+        .buy-btn:active {
+            transform: scale(0.96);
+        }
+
         .help-button {
             position: fixed;
             bottom: 30px;
@@ -112,18 +165,24 @@
             .site-title { font-size: 1.4rem; }
             .back-btn { padding: 6px 18px; font-size: 0.9rem; }
             .help-button { width: 65px; height: 65px; bottom: 25px; right: 15px; }
-            .center-message { font-size: 1.2rem; min-height: calc(100vh - 70px); }
+            .product-name { font-size: 1.6rem; }
+            .product-price { font-size: 1.3rem; }
+            .buy-btn { font-size: 1rem; padding: 10px 32px; }
         }
 
         @media (max-width: 550px) {
             .site-title { font-size: 1.2rem; }
             .back-btn { padding: 5px 14px; font-size: 0.8rem; }
             .help-button { width: 55px; height: 55px; bottom: 20px; right: 12px; }
+            .product-name { font-size: 1.4rem; }
+            .product-price { font-size: 1.1rem; }
         }
 
         @media (max-width: 480px) {
             .help-button { width: 50px; height: 50px; bottom: 18px; right: 12px; }
-            .center-message { font-size: 1rem; }
+            .product-name { font-size: 1.2rem; }
+            .product-price { font-size: 1rem; }
+            .buy-btn { font-size: 0.9rem; padding: 8px 25px; }
         }
     </style>
 </head>
@@ -134,8 +193,11 @@
     <button class="back-btn" id="backBtn">← Назад</button>
 </div>
 
-<div class="center-message">
-    🌸 Здесь будет ваш каталог цветов<br>Скоро появится...
+<div class="product-card">
+    <img src="розы.png" alt="розы" class="product-image" onerror="this.src='https://placehold.co/400x300/ffcdb5/9b4a2a?text=Розы'">
+    <div class="product-name">розы</div>
+    <div class="product-price">цена: 2500 ₽</div>
+    <button class="buy-btn" id="buyBtn">Купить</button>
 </div>
 
 <div class="help-button" id="helpButton">
@@ -153,6 +215,13 @@
     const backBtn = document.getElementById('backBtn');
     backBtn.addEventListener('click', () => {
         window.location.href = 'index.html';
+    });
+
+    const buyBtn = document.getElementById('buyBtn');
+    buyBtn.addEventListener('click', () => {
+        buyBtn.style.transform = 'scale(0.96)';
+        setTimeout(() => { buyBtn.style.transform = ''; }, 120);
+        alert('Товар добавлен в корзину!');
     });
 </script>
 </body>
