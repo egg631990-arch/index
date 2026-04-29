@@ -1,4 +1,4 @@
-<!-- order.html -->
+<!-- order.html (карточки товаров рядом на телефонах) -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -69,19 +69,23 @@
             transform: scale(0.96);
         }
 
+        /* Контейнер с карточками - на телефонах тоже в строку */
         .products-container {
             display: flex;
+            flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
+            align-items: flex-start;
             gap: 40px;
             padding: 40px 20px;
             flex: 1;
         }
 
         .product-card {
-            flex: 1;
+            flex: 0 1 auto;
+            width: 300px;
+            max-width: 45%;
             min-width: 250px;
-            max-width: 350px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -180,6 +184,7 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
+        /* АДАПТИВ: на телефонах карточки остаются рядом (горизонтально) */
         @media (max-width: 768px) {
             .site-title { font-size: 1.4rem; }
             .back-btn { padding: 6px 18px; font-size: 0.9rem; }
@@ -188,22 +193,33 @@
             .product-price { font-size: 1.2rem; }
             .buy-btn { font-size: 0.9rem; padding: 8px 28px; }
             .products-container { gap: 25px; padding: 30px 15px; }
-            .product-card { min-width: 220px; }
+            .product-card { width: 280px; max-width: 45%; min-width: 220px; padding: 20px 15px; }
+        }
+
+        @media (max-width: 650px) {
+            .product-card { width: 260px; max-width: 45%; min-width: 200px; }
+            .product-name { font-size: 1.3rem; }
+            .product-price { font-size: 1.1rem; }
         }
 
         @media (max-width: 550px) {
             .site-title { font-size: 1.2rem; }
             .back-btn { padding: 5px 14px; font-size: 0.8rem; }
             .help-button { width: 55px; height: 55px; bottom: 20px; right: 12px; }
-            .product-name { font-size: 1.3rem; }
-            .product-price { font-size: 1.1rem; }
             .products-container { gap: 20px; }
+            .product-card { width: 240px; max-width: 45%; min-width: 180px; }
+            .product-name { font-size: 1.2rem; }
+            .product-price { font-size: 1rem; }
+            .buy-btn { font-size: 0.8rem; padding: 7px 22px; }
         }
 
         @media (max-width: 480px) {
             .help-button { width: 50px; height: 50px; bottom: 18px; right: 12px; }
-            .product-name { font-size: 1.2rem; }
-            .product-card { padding: 18px 15px; }
+            .product-card { width: 220px; max-width: 47%; min-width: 160px; padding: 15px 12px; }
+            .product-name { font-size: 1.1rem; }
+            .product-price { font-size: 0.9rem; margin-bottom: 15px; }
+            .buy-btn { font-size: 0.75rem; padding: 6px 18px; }
+            .products-container { gap: 15px; padding: 25px 12px; }
         }
     </style>
 </head>
@@ -241,7 +257,7 @@
     helpBtn.addEventListener('click', () => {
         helpBtn.style.animation = 'none';
         setTimeout(() => { helpBtn.style.animation = ''; }, 10);
-        alert('Свяжитесь с нами: +7 900 000-00-00');
+        alert('Свяжитесь с нами: +7 900 225-08-33');
     });
 
     const backBtn = document.getElementById('backBtn');
