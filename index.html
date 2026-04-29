@@ -583,8 +583,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
         .support-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
             width: 70px;
             height: 70px;
             cursor: pointer;
@@ -592,6 +596,7 @@
             border: none;
             background: transparent;
             padding: 0;
+            z-index: 999;
         }
         .support-btn img {
             width: 100%;
@@ -604,6 +609,15 @@
         }
         .support-btn:active {
             transform: scale(0.95);
+        }
+        @media (max-width: 768px) {
+            .support-btn { width: 65px; height: 65px; bottom: 25px; right: 15px; }
+        }
+        @media (max-width: 550px) {
+            .support-btn { width: 55px; height: 55px; bottom: 20px; right: 12px; }
+        }
+        @media (max-width: 480px) {
+            .support-btn { width: 50px; height: 50px; bottom: 18px; right: 12px; }
         }
     </style>
 </head>
