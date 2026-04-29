@@ -31,7 +31,6 @@
 
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-        /* ===== РОЗОВАЯ ПОЛОСКА ===== */
         .navbar {
             background: linear-gradient(95deg, #ff9eb5 0%, #ffe0e8 40%, #ffb6c7 100%);
             padding: 8px 16px;
@@ -76,7 +75,6 @@
             transform: translateY(-1px);
         }
 
-        /* Основной контент */
         .main {
             width: 100%;
             max-width: 100%;
@@ -89,7 +87,6 @@
             scroll-margin-top: 70px;
         }
 
-        /* Фотки */
         .top-line {
             display: flex;
             justify-content: space-between;
@@ -185,7 +182,6 @@
             color: transparent;
         }
 
-        /* ===== КНОПКА КАТАЛОГ (ЕЩЁ БОЛЬШЕ) ===== */
         .buttons-row {
             display: flex;
             justify-content: center;
@@ -219,7 +215,6 @@
             transition: transform 0.08s ease;
         }
 
-        /* Дрожание */
         @keyframes gentleShake {
             0% { transform: translate(0,0) rotate(0deg); }
             20% { transform: translate(-1px, 0.5px) rotate(0.2deg); }
@@ -251,7 +246,6 @@
             background: transparent;
         }
 
-        /* ===== ЧЕРНЫЙ ПРЯМОУГОЛЬНИК ВНИЗУ ===== */
         .big-footer-rect {
             width: 100%;
             background-color: #232333;
@@ -323,7 +317,6 @@
             margin: 8px 0 4px 0;
         }
 
-        /* ===== ПЛАВАЮЩАЯ КНОПКА "ПОМОЩЬ" ===== */
         .help-button {
             position: fixed;
             bottom: 120px;
@@ -352,7 +345,6 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* Адаптив */
         @media (max-width: 768px) {
             .navbar { padding: 6px 12px; }
             .nav-container { gap: 32px; }
@@ -408,7 +400,6 @@
 </head>
 <body>
 
-<!-- Розовая полоска -->
 <div class="navbar">
     <div class="nav-container">
         <button class="nav-item" data-section="home">главная</button>
@@ -441,7 +432,6 @@
             <img src="цветы4.png" alt="цветы4" class="flower-img">
         </div>
 
-        <!-- Кнопка КАТАЛОГ -->
         <div class="buttons-row">
             <button class="action-btn" id="catalogBtn">Каталог</button>
         </div>
@@ -451,7 +441,6 @@
     <section id="contact-section" class="section"></section>
 </div>
 
-<!-- Чёрный прямоугольник внизу -->
 <div class="big-footer-rect">
     <div class="footer-container">
         <div class="footer-group">
@@ -487,13 +476,11 @@
     </div>
 </div>
 
-<!-- Плавающая кнопка помощи -->
 <div class="help-button" id="helpButton">
-    <img src="помощь.png" alt="помощь" onerror="this.src='https://placehold.co/70x70/ff9eb5/white?text=помощь'">
+    <img src="помощь.png" alt="помощь" onerror="this.src='https://placehold.co/70x70/ff9eb5/white?text=?'">
 </div>
 
 <script>
-    // Дрожание фоток
     const images = document.querySelectorAll('.flower-img');
     let ticking = false;
     let lastScroll = window.scrollY;
@@ -520,7 +507,6 @@
         }
     });
 
-    // Навигация (главная/заказ/контакт)
     const navBtns = document.querySelectorAll('.nav-item');
     const homeSec = document.getElementById('home-section');
     const orderSec = document.getElementById('order-section');
@@ -569,17 +555,14 @@
     updateActive();
     setTimeout(shake, 200);
 
-    // Кнопка помощи: анимация
     const helpBtn = document.getElementById('helpButton');
     helpBtn.addEventListener('click', () => {
         helpBtn.style.animation = 'none';
         setTimeout(() => { helpBtn.style.animation = ''; }, 10);
     });
 
-    // Кнопка "Каталог" — открывает НОВУЮ ВКЛАДКУ с пустой страницей и кнопкой поддержки
     const catalogBtn = document.getElementById('catalogBtn');
     catalogBtn.addEventListener('click', () => {
-        // Создаём HTML для новой вкладки: белый фон + кнопка "Поддержка" по центру
         const supportPage = `<!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -598,48 +581,45 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Montserrat', sans-serif;
         }
         .support-btn {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 2rem;
-            padding: 20px 50px;
-            background: #ff9eb5;
-            color: white;
-            border: none;
-            border-radius: 60px;
+            width: 70px;
+            height: 70px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            letter-spacing: 0.05em;
+            transition: transform 0.2s ease;
+            border: none;
+            background: transparent;
+            padding: 0;
+        }
+        .support-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
         }
         .support-btn:hover {
-            transform: scale(1.05);
-            background: #ff85a0;
-            box-shadow: 0 12px 28px rgba(255, 105, 130, 0.3);
+            transform: scale(1.08);
         }
         .support-btn:active {
-            transform: scale(0.97);
+            transform: scale(0.95);
         }
     </style>
 </head>
 <body>
-    <button class="support-btn" id="supportBtn">Поддержка</button>
+    <button class="support-btn" id="supportBtn">
+        <img src="помощь.png" alt="поддержка" onerror="this.src='https://placehold.co/70x70/ff9eb5/white?text=?'">
+    </button>
     <script>
         document.getElementById('supportBtn').addEventListener('click', () => {
-            alert('Свяжитесь с нами: +7 900 000-00-00 или support@flowers.ru');
+            alert('Свяжитесь с нами: +7 900 000-00-00');
         });
     <\/script>
 </body>
 </html>`;
-        
         const blob = new Blob([supportPage], {type: 'text/html'});
         const url = URL.createObjectURL(blob);
-        window.open(url, '_blank'); // открываем в новой вкладке
+        window.open(url, '_blank');
         setTimeout(() => URL.revokeObjectURL(url), 1000);
-        
-        // Анимация нажатия на главной кнопке
         catalogBtn.style.transform = 'scale(0.97)';
         setTimeout(() => { catalogBtn.style.transform = ''; }, 120);
     });
