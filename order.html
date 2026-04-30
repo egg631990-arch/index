@@ -182,7 +182,6 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* Модальное окно */
         .modal {
             display: none;
             position: fixed;
@@ -287,17 +286,34 @@
 
 <div id="modal" class="modal">
     <div class="modal-content">
-        <p>📱 Напишите нам в WhatsApp по номеру <strong>+79022500833</strong><br><br>✈️ или напишите нам в Telegram <strong>@0000</strong><br><br>чтобы обсудить все детали</p>
+        <p id="modalText">Текст</p>
         <button class="close-modal">Закрыть</button>
     </div>
 </div>
 
 <script>
+    const modal = document.getElementById('modal');
+    const modalText = document.getElementById('modalText');
+    const closeModalBtn = document.querySelector('.close-modal');
+
+    function showModal(text) {
+        modalText.innerHTML = text;
+        modal.style.display = 'flex';
+    }
+
+    closeModalBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+    });
+
     const helpBtn = document.getElementById('helpButton');
     helpBtn.addEventListener('click', () => {
         helpBtn.style.animation = 'none';
         setTimeout(() => { helpBtn.style.animation = ''; }, 10);
-        alert('Свяжитесь с нами: +7 900 225-08-33');
+        showModal('📞 Свяжитесь с нами: <strong>+79022500833</strong><br>✈️ Telegram: <strong>@BeesFlowerss</strong>');
     });
 
     const backBtn = document.getElementById('backBtn');
@@ -305,27 +321,12 @@
         window.location.href = 'index.html';
     });
 
-    const modal = document.getElementById('modal');
-    const closeModal = document.querySelector('.close-modal');
-    
-    function showModal() {
-        modal.style.display = 'flex';
-    }
-    
-    closeModal.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-    
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) modal.style.display = 'none';
-    });
-
     const buyBtns = document.querySelectorAll('.buy-btn');
     buyBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             btn.style.transform = 'scale(0.96)';
             setTimeout(() => { btn.style.transform = ''; }, 120);
-            showModal();
+            showModal('📱 Напишите нам в WhatsApp по номеру <strong>+79022500833</strong><br><br>✈️ или напишите нам в Telegram <strong>@BeesFlowerss</strong><br><br>чтобы обсудить все детали');
         });
     });
 </script>
