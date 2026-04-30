@@ -74,23 +74,23 @@
             flex-wrap: wrap;
             justify-content: center;
             align-items: flex-start;
-            gap: 40px;
+            gap: 30px;
             padding: 40px 20px;
             flex: 1;
         }
 
         .product-card {
             flex: 0 1 auto;
-            width: 300px;
-            max-width: 45%;
-            min-width: 250px;
+            width: 280px;
+            max-width: calc(33.333% - 30px);
+            min-width: 220px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             background: #fefaf7;
             border-radius: 30px;
-            padding: 25px 20px 30px;
+            padding: 20px 15px 25px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             transition: transform 0.2s ease;
         }
@@ -101,7 +101,7 @@
 
         .product-image {
             width: 100%;
-            max-width: 280px;
+            max-width: 240px;
             height: auto;
             border-radius: 20px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
@@ -115,29 +115,29 @@
 
         .product-name {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 600;
             color: #2d2d2a;
-            margin-top: 20px;
+            margin-top: 18px;
             margin-bottom: 8px;
         }
 
         .product-price {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 600;
             color: #b87c5a;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .buy-btn {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
             background: #ff9eb5;
             color: white;
             border: none;
-            padding: 10px 35px;
+            padding: 8px 28px;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -219,41 +219,53 @@
             cursor: pointer;
         }
 
-        @media (max-width: 768px) {
-            .site-title { font-size: 1.4rem; }
-            .back-btn { padding: 6px 18px; font-size: 0.9rem; }
-            .help-button { width: 65px; height: 65px; bottom: 25px; right: 15px; }
-            .product-name { font-size: 1.5rem; }
-            .product-price { font-size: 1.2rem; }
-            .buy-btn { font-size: 0.9rem; padding: 8px 28px; }
-            .products-container { gap: 25px; padding: 30px 15px; }
-            .product-card { width: 280px; max-width: 45%; min-width: 220px; padding: 20px 15px; }
+        .cookie-notice {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2d2d2a;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+            z-index: 1100;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            backdrop-filter: blur(4px);
         }
-
-        @media (max-width: 650px) {
-            .product-card { width: 260px; max-width: 45%; min-width: 200px; }
-            .product-name { font-size: 1.3rem; }
-            .product-price { font-size: 1.1rem; }
+        .cookie-notice button {
+            background: #ff9eb5;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            margin-top: 10px;
+            cursor: pointer;
         }
-
         @media (max-width: 550px) {
-            .site-title { font-size: 1.2rem; }
-            .back-btn { padding: 5px 14px; font-size: 0.8rem; }
-            .help-button { width: 55px; height: 55px; bottom: 20px; right: 12px; }
-            .products-container { gap: 20px; }
-            .product-card { width: 240px; max-width: 45%; min-width: 180px; }
+            .cookie-notice { font-size: 0.8rem; padding: 12px 18px; width: 85%; }
+        }
+
+        @media (max-width: 900px) {
+            .product-card { width: calc(50% - 30px); max-width: calc(50% - 30px); }
+        }
+        @media (max-width: 650px) {
+            .product-card { width: calc(50% - 20px); max-width: calc(50% - 20px); min-width: 160px; }
             .product-name { font-size: 1.2rem; }
             .product-price { font-size: 1rem; }
-            .buy-btn { font-size: 0.8rem; padding: 7px 22px; }
+            .buy-btn { font-size: 0.8rem; padding: 6px 20px; }
         }
-
         @media (max-width: 480px) {
+            .product-card { width: calc(50% - 15px); max-width: calc(50% - 15px); min-width: 140px; padding: 12px 10px; }
+            .product-name { font-size: 1rem; margin-top: 12px; }
+            .product-price { font-size: 0.9rem; margin-bottom: 12px; }
+            .buy-btn { font-size: 0.7rem; padding: 5px 14px; }
             .help-button { width: 50px; height: 50px; bottom: 18px; right: 12px; }
-            .product-card { width: 220px; max-width: 47%; min-width: 160px; padding: 15px 12px; }
-            .product-name { font-size: 1.1rem; }
-            .product-price { font-size: 0.9rem; margin-bottom: 15px; }
-            .buy-btn { font-size: 0.75rem; padding: 6px 18px; }
-            .products-container { gap: 15px; padding: 25px 12px; }
         }
     </style>
 </head>
@@ -265,18 +277,47 @@
 </div>
 
 <div class="products-container">
+    <!-- 1. розы -->
     <div class="product-card">
-        <img src="розы.jpg" alt="розы" class="product-image" onerror="this.src='https://placehold.co/300x300/ffcdb5/9b4a2a?text=Розы'">
+        <img src="розы.jpg" alt="розы" class="product-image" onerror="this.src='https://placehold.co/300x300/ffcdb5/9b4a2a?text=розы'">
         <div class="product-name">розы</div>
         <div class="product-price">цена: 2500 ₽</div>
         <button class="buy-btn" data-name="розы" data-price="2500">Купить</button>
     </div>
-
+    <!-- 2. композ1 -->
     <div class="product-card">
-        <img src="композ1.jpg" alt="композиция" class="product-image" onerror="this.src='https://placehold.co/300x300/ffcdb5/9b4a2a?text=Композиция'">
+        <img src="композ1.jpg" alt="композиция" class="product-image" onerror="this.src='https://placehold.co/300x300/ffcdb5/9b4a2a?text=композ1'">
         <div class="product-name">композиция</div>
         <div class="product-price">цена: 2300 ₽</div>
         <button class="buy-btn" data-name="композиция" data-price="2300">Купить</button>
+    </div>
+    <!-- 3. композ2 -->
+    <div class="product-card">
+        <img src="композ2.jpg" alt="композ2" class="product-image" onerror="this.src='https://placehold.co/300x300/ffcdb5/9b4a2a?text=композ2'">
+        <div class="product-name">композ2</div>
+        <div class="product-price">цена: 2200 ₽</div>
+        <button class="buy-btn" data-name="композ2" data-price="2200">Купить</button>
+    </div>
+    <!-- 4. композ3 -->
+    <div class="product-card">
+        <img src="композ3.jpg" alt="композ3" class="product-image" onerror="this.src='https://placehold.co/300x300/ffcdb5/9b4a2a?text=композ3'">
+        <div class="product-name">композ3</div>
+        <div class="product-price">цена: 2000 ₽</div>
+        <button class="buy-btn" data-name="композ3" data-price="2000">Купить</button>
+    </div>
+    <!-- 5. композ4 -->
+    <div class="product-card">
+        <img src="композ4.jpg" alt="композ4" class="product-image" onerror="this.src='https://placehold.co/300x300/ffcdb5/9b4a2a?text=композ4'">
+        <div class="product-name">композ4</div>
+        <div class="product-price">цена: 3000 ₽</div>
+        <button class="buy-btn" data-name="композ4" data-price="3000">Купить</button>
+    </div>
+    <!-- 6. композ5 -->
+    <div class="product-card">
+        <img src="композ5.jpg" alt="композ5" class="product-image" onerror="this.src='https://placehold.co/300x300/ffcdb5/9b4a2a?text=композ5'">
+        <div class="product-name">композ5</div>
+        <div class="product-price">цена: 2000 ₽</div>
+        <button class="buy-btn" data-name="композ5" data-price="2000">Купить</button>
     </div>
 </div>
 
@@ -324,11 +365,32 @@
     const buyBtns = document.querySelectorAll('.buy-btn');
     buyBtns.forEach(btn => {
         btn.addEventListener('click', () => {
+            const name = btn.getAttribute('data-name');
+            const price = btn.getAttribute('data-price');
             btn.style.transform = 'scale(0.96)';
             setTimeout(() => { btn.style.transform = ''; }, 120);
-            showModal('📱 Напишите нам в WhatsApp по номеру <strong>+79022500833</strong><br><br>✈️ или напишите нам в Telegram <strong>@BeesFlowerss</strong><br><br>чтобы обсудить все детали');
+            showModal(`📱 Напишите нам в WhatsApp по номеру <strong>+79022500833</strong><br><br>✈️ или напишите нам в Telegram <strong>@BeesFlowerss</strong><br><br>чтобы обсудить детали заказа "${name}" (${price} ₽)`);
         });
     });
+
+    // Всплывающее окно о cookie и доставке (один раз)
+    function showCookieNotice() {
+        if (localStorage.getItem('cookieNoticeClosedOrder')) return;
+        const notice = document.createElement('div');
+        notice.className = 'cookie-notice';
+        notice.innerHTML = `
+            <p>🍪 Мы не используем файлы cookie и доставляем только в:<br>
+            Щелково, Ивантеевка, Лосино-Петровский, Фрязино, Фряново, Балашиха.<br>
+            Новый городок: Щелково.</p>
+            <button id="okCookieBtn">ОК</button>
+        `;
+        document.body.appendChild(notice);
+        document.getElementById('okCookieBtn').addEventListener('click', () => {
+            notice.remove();
+            localStorage.setItem('cookieNoticeClosedOrder', 'true');
+        });
+    }
+    showCookieNotice();
 </script>
 </body>
 </html>
