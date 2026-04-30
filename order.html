@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Пчелкины Цветы | Каталог</title>
+    <title>Цветы | Букеты</title>
     <style>
         * {
             margin: 0;
@@ -12,146 +12,309 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            width: 100%;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
         body {
             min-height: 100vh;
-            background: #ffffff;
             font-family: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+            background: #ffffff;
             display: flex;
             flex-direction: column;
         }
 
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-        .top-bar {
+        .navbar {
             background: linear-gradient(95deg, #ff9eb5 0%, #ffe0e8 40%, #ffb6c7 100%);
-            padding: 16px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 8px 16px;
+            box-shadow: 0 2px 8px rgba(255, 105, 130, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
         }
 
-        .site-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            letter-spacing: 0.03em;
+        .nav-container {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            align-items: baseline;
         }
 
-        .back-btn {
+        .nav-item {
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
-            font-weight: 600;
-            background: rgba(255,255,255,0.25);
-            border: 1px solid rgba(255,255,255,0.6);
-            color: white;
-            padding: 8px 24px;
-            border-radius: 40px;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: #ffffff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
             cursor: pointer;
             transition: all 0.2s ease;
-            backdrop-filter: blur(2px);
+            padding: 4px 0;
+            background: transparent;
+            border: none;
         }
 
-        .back-btn:hover {
-            background: rgba(255,255,255,0.4);
-            transform: translateY(-2px);
+        .nav-item.active {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #fff4e6;
+            text-shadow: 0 0 5px rgba(210, 60, 90, 0.3);
         }
 
-        .back-btn:active {
-            transform: scale(0.96);
+        .nav-item:hover {
+            transform: translateY(-1px);
         }
 
-        .products-container {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 40px;
-            padding: 40px 20px;
+        .main {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
             flex: 1;
         }
 
-        .product-card {
-            flex: 0 1 auto;
-            width: 300px;
-            max-width: 45%;
-            min-width: 250px;
+        .section {
+            scroll-margin-top: 70px;
+        }
+
+        .top-line {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background: #fefaf7;
-            border-radius: 30px;
-            padding: 25px 20px 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: transform 0.2s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-image {
+            justify-content: space-between;
+            align-items: flex-start;
             width: 100%;
-            max-width: 280px;
+            margin: 0;
+            padding: 0;
+            gap: 0;
+        }
+
+        .flower-left {
+            flex: 1;
+            text-align: left;
+            margin: 0;
+            padding: 0;
+            line-height: 0;
+            margin-left: -20px;
+        }
+        .flower-left img {
+            display: block;
+            width: auto;
+            max-width: 100%;
             height: auto;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            margin: 0;
+            padding: 0;
+            margin-left: -18px;
+            transition: transform 0.25s ease;
             cursor: pointer;
         }
 
-        .product-image:hover {
-            transform: scale(1.02);
+        .flower-right {
+            flex: 1;
+            text-align: right;
+            margin: 0;
+            padding: 0;
+            line-height: 0;
+        }
+        .flower-right img {
+            display: inline-block;
+            width: 50%;
+            max-width: 50%;
+            height: auto;
+            margin: 0;
+            padding: 0;
+            transition: transform 0.25s ease;
+            cursor: pointer;
         }
 
-        .product-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #2d2d2a;
+        .flower-center {
+            text-align: center;
+            margin: 0;
             margin-top: 20px;
+            padding: 0;
+            line-height: 0;
+        }
+        .flower-center img {
+            display: inline-block;
+            width: 33.333%;
+            max-width: 33.333%;
+            height: auto;
+            transition: transform 0.25s ease;
+            cursor: pointer;
+        }
+
+        .text-block {
+            text-align: center;
+            margin: 40px 20px 30px 20px;
+            padding: 15px 0 0 0;
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', 'Georgia', serif;
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #2d2d2a;
+        }
+
+        .main-title .slash {
+            font-weight: 400;
+            color: #b87c5a;
+            margin: 0 6px;
+        }
+
+        .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            background: linear-gradient(135deg, #b87c5a 0%, #d9a77a 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .buttons-row {
+            display: flex;
+            justify-content: center;
+            margin: 30px 20px 50px 20px;
+        }
+
+        .action-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: #ffe0d4;
+            color: #9b4a2a;
+            border: 2px solid #ffcdb5;
+            letter-spacing: 0.08em;
+            padding: 36px 90px;
+            font-size: 2.8rem;
+            border-radius: 80px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-6px);
+            background: #ffdfd0;
+            box-shadow: 0 16px 32px rgba(180, 95, 59, 0.3);
+        }
+
+        .action-btn:active {
+            transform: scale(0.97);
+            transition: transform 0.08s ease;
+        }
+
+        @keyframes gentleShake {
+            0% { transform: translate(0,0) rotate(0deg); }
+            20% { transform: translate(-1px, 0.5px) rotate(0.2deg); }
+            40% { transform: translate(1px, -0.3px) rotate(-0.2deg); }
+            60% { transform: translate(-0.5px, 0.8px) rotate(0.1deg); }
+            80% { transform: translate(0.5px, -0.2px) rotate(-0.1deg); }
+            100% { transform: translate(0,0) rotate(0deg); }
+        }
+
+        .shake-on-scroll {
+            animation: gentleShake 0.4s ease-in-out forwards;
+        }
+
+        @media (hover: hover) {
+            .flower-left img:hover,
+            .flower-right img:hover,
+            .flower-center img:hover {
+                transform: scale(1.05);
+            }
+        }
+        .flower-left img:active,
+        .flower-right img:active,
+        .flower-center img:active {
+            transform: scale(1.04);
+        }
+
+        #order-section, #contact-section {
+            min-height: 1px;
+            background: transparent;
+        }
+
+        .big-footer-rect {
+            width: 100%;
+            background-color: #232333;
+            padding: 50px 30px 40px 30px;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 50px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .footer-group {
+            flex: 0 1 auto;
+            min-width: 150px;
+        }
+
+        .footer-group h4 {
+            color: #ffc6d3;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.05em;
+            border-left: 3px solid #ff9eb5;
+            padding-left: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .footer-links .footer-item {
+            color: #e0e0e0;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: 0.2s;
+            cursor: pointer;
+            display: block;
+        }
+
+        .footer-links .footer-item:hover {
+            color: #ffb6c7;
+            transform: translateX(3px);
+        }
+
+        .contact-footer .phone-foot {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffd5df;
             margin-bottom: 8px;
         }
 
-        .product-price {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #b87c5a;
-            margin-bottom: 20px;
+        .contact-footer .mail-foot {
+            font-size: 0.8rem;
+            color: #cbcbcb;
+            word-break: break-all;
         }
 
-        .buy-btn {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            background: #ff9eb5;
-            color: white;
-            border: none;
-            padding: 10px 35px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(255, 105, 130, 0.3);
-        }
-
-        .buy-btn:hover {
-            background: #ff85a0;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 105, 130, 0.4);
-        }
-
-        .buy-btn:active {
-            transform: scale(0.96);
+        .sub-contact-foot {
+            font-size: 0.7rem;
+            color: #a0a0b0;
+            margin: 8px 0 4px 0;
         }
 
         .help-button {
@@ -182,6 +345,7 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
+        /* Модальное окно */
         .modal {
             display: none;
             position: fixed;
@@ -220,63 +384,133 @@
         }
 
         @media (max-width: 768px) {
-            .site-title { font-size: 1.4rem; }
-            .back-btn { padding: 6px 18px; font-size: 0.9rem; }
+            .navbar { padding: 6px 12px; }
+            .nav-container { gap: 32px; }
+            .nav-item { font-size: 0.9rem; }
+            .nav-item.active { font-size: 1.1rem; }
+            .flower-left { margin-left: -25px; }
+            .flower-left img { margin-left: -20px; }
+            .flower-right img { width: 52%; }
+            .flower-center img { width: 40%; }
+            .main-title { font-size: 42px; }
+            .subtitle { font-size: 20px; }
+            .text-block { margin: 30px 15px 20px; }
+            .buttons-row { margin: 20px 15px 40px; }
+            .action-btn { padding: 22px 50px; font-size: 1.8rem; }
+            .big-footer-rect { padding: 35px 20px; margin-top: 40px; }
+            .footer-container { gap: 30px; }
+            .footer-group { min-width: 130px; }
             .help-button { width: 65px; height: 65px; bottom: 25px; right: 15px; }
-            .product-name { font-size: 1.5rem; }
-            .product-price { font-size: 1.2rem; }
-            .buy-btn { font-size: 0.9rem; padding: 8px 28px; }
-            .products-container { gap: 25px; padding: 30px 15px; }
-            .product-card { width: 280px; max-width: 45%; min-width: 220px; padding: 20px 15px; }
-        }
-
-        @media (max-width: 650px) {
-            .product-card { width: 260px; max-width: 45%; min-width: 200px; }
-            .product-name { font-size: 1.3rem; }
-            .product-price { font-size: 1.1rem; }
         }
 
         @media (max-width: 550px) {
-            .site-title { font-size: 1.2rem; }
-            .back-btn { padding: 5px 14px; font-size: 0.8rem; }
+            .footer-container { gap: 25px; }
+            .footer-group { min-width: 120px; }
+            .footer-group h4 { font-size: 0.85rem; }
+            .footer-links .footer-item { font-size: 0.7rem; }
             .help-button { width: 55px; height: 55px; bottom: 20px; right: 12px; }
-            .products-container { gap: 20px; }
-            .product-card { width: 240px; max-width: 45%; min-width: 180px; }
-            .product-name { font-size: 1.2rem; }
-            .product-price { font-size: 1rem; }
-            .buy-btn { font-size: 0.8rem; padding: 7px 22px; }
+            .action-btn { padding: 16px 35px; font-size: 1.4rem; }
         }
 
         @media (max-width: 480px) {
-            .help-button { width: 50px; height: 50px; bottom: 18px; right: 12px; }
-            .product-card { width: 220px; max-width: 47%; min-width: 160px; padding: 15px 12px; }
-            .product-name { font-size: 1.1rem; }
-            .product-price { font-size: 0.9rem; margin-bottom: 15px; }
-            .buy-btn { font-size: 0.75rem; padding: 6px 18px; }
-            .products-container { gap: 15px; padding: 25px 12px; }
+            .flower-left { margin-left: -30px; }
+            .flower-left img { margin-left: -22px; }
+            .flower-right img { width: 55%; }
+            .flower-center img { width: 45%; }
+            .main-title { font-size: 32px; }
+            .subtitle { font-size: 18px; }
+            .big-footer-rect { padding: 30px 15px; margin-top: 30px; }
+            .help-button { bottom: 18px; width: 50px; height: 50px; }
+            .action-btn { padding: 14px 28px; font-size: 1.2rem; border-radius: 50px; }
+        }
+
+        @media (min-width: 1024px) {
+            .flower-left { margin-left: -30px; }
+            .flower-left img { margin-left: -20px; }
+        }
+
+        img {
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
         }
     </style>
 </head>
 <body>
 
-<div class="top-bar">
-    <div class="site-title">🌼 Пчелкины Цветы</div>
-    <button class="back-btn" id="backBtn">← Назад</button>
+<div class="navbar">
+    <div class="nav-container">
+        <button class="nav-item" data-section="home">главная</button>
+        <button class="nav-item" data-section="order">заказ</button>
+        <button class="nav-item" data-section="contact">контакт</button>
+    </div>
 </div>
 
-<div class="products-container">
-    <div class="product-card">
-        <img src="розы.jpg" alt="розы" class="product-image" onerror="this.src='https://placehold.co/300x300/ffcdb5/9b4a2a?text=Розы'">
-        <div class="product-name">розы</div>
-        <div class="product-price">цена: 2500 ₽</div>
-        <button class="buy-btn" data-name="розы" data-price="2500">Купить</button>
-    </div>
+<div class="main">
+    <section id="home-section" class="section">
+        <div class="top-line">
+            <div class="flower-left">
+                <img src="цветы1.png" alt="цветы1" class="flower-img">
+            </div>
+            <div class="flower-right">
+                <img src="цветы3.png" alt="цветы3" class="flower-img">
+            </div>
+        </div>
 
-    <div class="product-card">
-        <img src="композ1.jpg" alt="композиция" class="product-image" onerror="this.src='https://placehold.co/300x300/ffcdb5/9b4a2a?text=Композиция'">
-        <div class="product-name">композиция</div>
-        <div class="product-price">цена: 2300 ₽</div>
-        <button class="buy-btn" data-name="композиция" data-price="2300">Купить</button>
+        <div class="text-block">
+            <div class="main-title">
+                Цветы<span class="slash">/</span>Букеты
+            </div>
+            <div class="subtitle">
+                на заказ
+            </div>
+        </div>
+
+        <div class="flower-center">
+            <img src="цветы4.png" alt="цветы4" class="flower-img">
+        </div>
+
+        <div class="buttons-row">
+            <button class="action-btn" id="catalogBtn">Каталог</button>
+        </div>
+    </section>
+
+    <section id="order-section" class="section"></section>
+    <section id="contact-section" class="section"></section>
+</div>
+
+<div class="big-footer-rect">
+    <div class="footer-container">
+        <div class="footer-group">
+            <h4>О нас</h4>
+            <div class="footer-links">
+                <div class="footer-item" data-info="about">О нас</div>
+                <div class="footer-item" data-info="delivery">Доставка</div>
+                <div class="footer-item" data-info="payment">Оплата</div>
+                <div class="footer-item" data-info="social">Соц Сети</div>
+            </div>
+        </div>
+
+        <div class="footer-group">
+            <h4>Клиентам</h4>
+            <div class="footer-links">
+                <div class="footer-item" data-info="contacts">Контакты</div>
+                <div class="footer-item" data-info="help">Помощь</div>
+                <div class="footer-item" data-info="privacy">Политика конфидициальности</div>
+                <div class="footer-item" data-info="terms">Условия покупки</div>
+                <div class="footer-item" data-info="bouquet_help">Помощь по букетам</div>
+                <div class="footer-item" data-info="discounts">Скидки</div>
+            </div>
+        </div>
+
+        <div class="footer-group">
+            <h4>Связь</h4>
+            <div class="footer-links contact-footer">
+                <div class="phone-foot">+79022500833</div>
+                <div class="sub-contact-foot">Вопросы/сотрудничество</div>
+                <div class="mail-foot">gmail@gmail.com</div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -285,19 +519,33 @@
 </div>
 
 <div id="modal" class="modal">
-    <div class="modal-content">
-        <p id="modalText">Текст</p>
+    <div class="modal-content" id="modalText">
+        <p>Текст</p>
         <button class="close-modal">Закрыть</button>
     </div>
 </div>
 
 <script>
+    // Тексты для всплывающих окон (Instagram удалён)
+    const infoTexts = {
+        about: "Я женщина которая сама делает букеты или доставляет цветы делаю для себя и тех кому нужно мне нравится этим заниматься",
+        delivery: "Дата и время доставки, часы работы с 7:00-23:00 города доставки: Щелково, Ивантеевка, Лосино-Петровский, Фрязино, Фряново, Балашиха. Мы уведомляем вас о доставке по e-mail",
+        payment: "Банковской картой, наличными при получении",
+        social: "Telegram: @BeesFlowerss",   // <--- убрал Instagram
+        contacts: "Связаться с нами можно по телефону +79022500833 или в Telegram @BeesFlowerss",
+        help: "Напишите нам в Telegram @BeesFlowerss — поможем с любым вопросом",
+        privacy: "Ваши данные и условия покупки все законно и честно, никаких мошеннических афер. Ваша правда в первую очередь, мы всегда готовы вам подсказать или поговорить просто так.",
+        terms: "Ваша права всегда в первую очередь, не перегибаем политику конфиденциальности. Вы выбираете понравившийся вам вариант или просите сделать по техническому заданию или по фото других работ. Обговариваем все до точности без ошибки. Выполняем заказ: либо оплата проходит сразу, или при встрече. Привозим лично для вас, при встрече объясняем как сделать чтобы не засох сразу. Если не рассказали — попросите в личные сообщения, может быть забыли. В условиях без оскорблений, без спама, не любим плохих клиентов. Всегда всем рады, не оставим обделенными.",
+        bouquet_help: "Напишите нам в личку в Telegram @BeesFlowerss и попросите рассказать — расскажем!",
+        discounts: "Опа поздравляю! Скидки для постоянных покупателей 12%. Постоянные покупатели от 3-4 раз."
+    };
+
     const modal = document.getElementById('modal');
-    const modalText = document.getElementById('modalText');
+    const modalTextP = document.getElementById('modalText').querySelector('p');
     const closeModalBtn = document.querySelector('.close-modal');
 
     function showModal(text) {
-        modalText.innerHTML = text;
+        modalTextP.innerHTML = text;
         modal.style.display = 'flex';
     }
 
@@ -309,6 +557,93 @@
         if (e.target === modal) modal.style.display = 'none';
     });
 
+    // Навешиваем обработчики на все пункты в футере
+    document.querySelectorAll('.footer-item').forEach(item => {
+        const infoType = item.getAttribute('data-info');
+        if (infoType && infoTexts[infoType]) {
+            item.addEventListener('click', () => {
+                showModal(infoTexts[infoType]);
+            });
+        }
+    });
+
+    // Дрожание фоток
+    const images = document.querySelectorAll('.flower-img');
+    let ticking = false;
+    let lastScroll = window.scrollY;
+
+    function shake() {
+        images.forEach(img => {
+            img.classList.remove('shake-on-scroll');
+            void img.offsetWidth;
+            img.classList.add('shake-on-scroll');
+            setTimeout(() => img.classList.remove('shake-on-scroll'), 450);
+        });
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                if (window.scrollY !== lastScroll) {
+                    shake();
+                    lastScroll = window.scrollY;
+                }
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    // Навигация (главная/заказ/контакт)
+    const navBtns = document.querySelectorAll('.nav-item');
+    const homeSec = document.getElementById('home-section');
+    const orderSec = document.getElementById('order-section');
+    const contactSec = document.getElementById('contact-section');
+
+    function updateActive() {
+        if (!homeSec || !orderSec || !contactSec) return;
+        const scrollPos = window.scrollY + 100;
+        const homeTop = homeSec.offsetTop;
+        const orderTop = orderSec.offsetTop;
+        const contactTop = contactSec.offsetTop;
+
+        let active = 'home';
+        if (scrollPos >= contactTop - 50) active = 'contact';
+        else if (scrollPos >= orderTop - 60) active = 'order';
+        else active = 'home';
+
+        navBtns.forEach(btn => {
+            if (btn.dataset.section === active) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+    }
+
+    function scrollToSection(sectionId) {
+        let target;
+        if (sectionId === 'home') target = homeSec;
+        else if (sectionId === 'order') target = orderSec;
+        else target = contactSec;
+
+        if (target) {
+            const offset = 65;
+            const pos = target.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: pos - offset, behavior: 'smooth' });
+            setTimeout(updateActive, 150);
+        }
+    }
+
+    navBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            scrollToSection(btn.dataset.section);
+        });
+    });
+
+    window.addEventListener('scroll', () => requestAnimationFrame(updateActive));
+    window.addEventListener('load', updateActive);
+    updateActive();
+    setTimeout(shake, 200);
+
+    // Кнопка "помощь" (плавающая)
     const helpBtn = document.getElementById('helpButton');
     helpBtn.addEventListener('click', () => {
         helpBtn.style.animation = 'none';
@@ -316,18 +651,12 @@
         showModal('📞 Свяжитесь с нами: <strong>+79022500833</strong><br>✈️ Telegram: <strong>@BeesFlowerss</strong>');
     });
 
-    const backBtn = document.getElementById('backBtn');
-    backBtn.addEventListener('click', () => {
-        window.location.href = 'index.html';
-    });
-
-    const buyBtns = document.querySelectorAll('.buy-btn');
-    buyBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            btn.style.transform = 'scale(0.96)';
-            setTimeout(() => { btn.style.transform = ''; }, 120);
-            showModal('📱 Напишите нам в WhatsApp по номеру <strong>+79022500833</strong><br><br>✈️ или напишите нам в Telegram <strong>@BeesFlowerss</strong><br><br>чтобы обсудить все детали');
-        });
+    // Кнопка "Каталог"
+    const catalogBtn = document.getElementById('catalogBtn');
+    catalogBtn.addEventListener('click', () => {
+        window.location.href = 'order.html';
+        catalogBtn.style.transform = 'scale(0.97)';
+        setTimeout(() => { catalogBtn.style.transform = ''; }, 120);
     });
 </script>
 </body>
