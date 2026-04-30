@@ -345,7 +345,7 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* Модальное окно */
+        /* Модальное окно для информации */
         .modal {
             display: none;
             position: fixed;
@@ -381,6 +381,39 @@
             color: white;
             font-weight: 600;
             cursor: pointer;
+        }
+
+        /* Специальное окно "cookie" */
+        .cookie-notice {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2d2d2a;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+            z-index: 1100;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            backdrop-filter: blur(4px);
+        }
+        .cookie-notice button {
+            background: #ff9eb5;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        @media (max-width: 550px) {
+            .cookie-notice { font-size: 0.8rem; padding: 12px 18px; width: 85%; }
         }
 
         @media (max-width: 768px) {
@@ -508,7 +541,7 @@
             <div class="footer-links contact-footer">
                 <div class="phone-foot">+79022500833</div>
                 <div class="sub-contact-foot">Вопросы/сотрудничество</div>
-                <div class="mail-foot">gmail@gmail.com</div>
+                <div class="mail-foot">beiesflowerss@gmail.com</div>
             </div>
         </div>
     </div>
@@ -531,7 +564,7 @@
         about: "Я женщина которая сама делает букеты или доставляет цветы делаю для себя и тех кому нужно мне нравится этим заниматься",
         delivery: "Дата и время доставки, часы работы с 7:00-23:00 города доставки: Щелково, Ивантеевка, Лосино-Петровский, Фрязино, Фряново, Балашиха. Мы уведомляем вас о доставке по e-mail",
         payment: "Банковской картой, наличными при получении",
-        social: "Наши соцсети: Instagram @bees_flowers, Telegram @BeesFlowerss",
+        social: "Наши соцсети: Telegram @BeesFlowerss",
         contacts: "Связаться с нами можно по телефону +79022500833 или в Telegram @BeesFlowerss",
         help: "Напишите нам в Telegram @BeesFlowerss — поможем с любым вопросом",
         privacy: "Ваши данные и условия покупки все законно и честно, никаких мошеннических афер. Ваша правда в первую очередь, мы всегда готовы вам подсказать или поговорить просто так.",
@@ -557,7 +590,7 @@
         if (e.target === modal) modal.style.display = 'none';
     });
 
-    // Навешиваем обработчики на все пункты в футере
+    // Навешиваем обработчики на пункты футера
     document.querySelectorAll('.footer-item').forEach(item => {
         const infoType = item.getAttribute('data-info');
         if (infoType && infoTexts[infoType]) {
@@ -594,7 +627,7 @@
         }
     });
 
-    // Навигация (главная/заказ/контакт)
+    // Навигация
     const navBtns = document.querySelectorAll('.nav-item');
     const homeSec = document.getElementById('home-section');
     const orderSec = document.getElementById('order-section');
@@ -643,7 +676,7 @@
     updateActive();
     setTimeout(shake, 200);
 
-    // Кнопка "помощь" (плавающая)
+    // Плавающая помощь
     const helpBtn = document.getElementById('helpButton');
     helpBtn.addEventListener('click', () => {
         helpBtn.style.animation = 'none';
@@ -651,13 +684,32 @@
         showModal('📞 Свяжитесь с нами: <strong>+79022500833</strong><br>✈️ Telegram: <strong>@BeesFlowerss</strong>');
     });
 
-    // Кнопка "Каталог"
+    // Каталог
     const catalogBtn = document.getElementById('catalogBtn');
     catalogBtn.addEventListener('click', () => {
         window.location.href = 'order.html';
         catalogBtn.style.transform = 'scale(0.97)';
         setTimeout(() => { catalogBtn.style.transform = ''; }, 120);
     });
+
+    // Всплывающее окно "мы не используем cookie" (показывается один раз)
+    function showCookieNotice() {
+        if (localStorage.getItem('cookieNoticeClosed')) return;
+        const notice = document.createElement('div');
+        notice.className = 'cookie-notice';
+        notice.innerHTML = `
+            <p>🍪 Мы не используем файлы cookie и доставляем только в:<br>
+            Щелково, Ивантеевка, Лосино-Петровский, Фрязино, Фряново, Балашиха.<br>
+            Новый городок: Щелково.</p>
+            <button id="okCookieBtn">ОК</button>
+        `;
+        document.body.appendChild(notice);
+        document.getElementById('okCookieBtn').addEventListener('click', () => {
+            notice.remove();
+            localStorage.setItem('cookieNoticeClosed', 'true');
+        });
+    }
+    showCookieNotice();
 </script>
 </body>
 </html>
