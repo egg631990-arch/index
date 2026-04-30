@@ -484,22 +484,22 @@
         <div class="footer-group">
             <h4>О нас</h4>
             <div class="footer-links">
-                <div class="footer-item">О нас</div>
-                <div class="footer-item">Доставка</div>
-                <div class="footer-item">Оплата</div>
-                <div class="footer-item">Соц Сети</div>
+                <div class="footer-item" data-info="about">О нас</div>
+                <div class="footer-item" data-info="delivery">Доставка</div>
+                <div class="footer-item" data-info="payment">Оплата</div>
+                <div class="footer-item" data-info="social">Соц Сети</div>
             </div>
         </div>
 
         <div class="footer-group">
             <h4>Клиентам</h4>
             <div class="footer-links">
-                <div class="footer-item">Контакты</div>
-                <div class="footer-item">Помощь</div>
-                <div class="footer-item">Политика конфидициальности</div>
-                <div class="footer-item">Условия покупки</div>
-                <div class="footer-item">Помощь по букетам</div>
-                <div class="footer-item">Скидки</div>
+                <div class="footer-item" data-info="contacts">Контакты</div>
+                <div class="footer-item" data-info="help">Помощь</div>
+                <div class="footer-item" data-info="privacy">Политика конфидициальности</div>
+                <div class="footer-item" data-info="terms">Условия покупки</div>
+                <div class="footer-item" data-info="bouquet_help">Помощь по букетам</div>
+                <div class="footer-item" data-info="discounts">Скидки</div>
             </div>
         </div>
 
@@ -519,13 +519,55 @@
 </div>
 
 <div id="modal" class="modal">
-    <div class="modal-content">
-        <p>📱 Напишите нам в WhatsApp по номеру <strong>+79022500833</strong><br><br>✈️ или напишите нам в Telegram <strong>@0000</strong><br><br>чтобы обсудить все детали</p>
+    <div class="modal-content" id="modalText">
+        <p>Текст</p>
         <button class="close-modal">Закрыть</button>
     </div>
 </div>
 
 <script>
+    // Тексты для всплывающих окон
+    const infoTexts = {
+        about: "Я женщина которая сама делает букеты или доставляет цветы делаю для себя и тех кому нужно мне нравится этим заниматься",
+        delivery: "Дата и время доставки, часы работы с 7:00-23:00 города доставки: Щелково, Ивантеевка, Лосино-Петровский, Фрязино, Фряново, Балашиха. Мы уведомляем вас о доставке по e-mail",
+        payment: "Банковской картой, наличными при получении",
+        social: "Наши соцсети: Instagram @bees_flowers, Telegram @BeesFlowerss",
+        contacts: "Связаться с нами можно по телефону +79022500833 или в Telegram @BeesFlowerss",
+        help: "Напишите нам в Telegram @BeesFlowerss — поможем с любым вопросом",
+        privacy: "Ваши данные и условия покупки все законно и честно, никаких мошеннических афер. Ваша правда в первую очередь, мы всегда готовы вам подсказать или поговорить просто так.",
+        terms: "Ваша права всегда в первую очередь, не перегибаем политику конфиденциальности. Вы выбираете понравившийся вам вариант или просите сделать по техническому заданию или по фото других работ. Обговариваем все до точности без ошибки. Выполняем заказ: либо оплата проходит сразу, или при встрече. Привозим лично для вас, при встрече объясняем как сделать чтобы не засох сразу. Если не рассказали — попросите в личные сообщения, может быть забыли. В условиях без оскорблений, без спама, не любим плохих клиентов. Всегда всем рады, не оставим обделенными.",
+        bouquet_help: "Напишите нам в личку в Telegram @BeesFlowerss и попросите рассказать — расскажем!",
+        discounts: "Опа поздравляю! Скидки для постоянных покупателей 12%. Постоянные покупатели от 3-4 раз."
+    };
+
+    const modal = document.getElementById('modal');
+    const modalTextP = document.getElementById('modalText').querySelector('p');
+    const closeModalBtn = document.querySelector('.close-modal');
+
+    function showModal(text) {
+        modalTextP.innerHTML = text;
+        modal.style.display = 'flex';
+    }
+
+    closeModalBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+    });
+
+    // Навешиваем обработчики на все пункты в футере
+    document.querySelectorAll('.footer-item').forEach(item => {
+        const infoType = item.getAttribute('data-info');
+        if (infoType && infoTexts[infoType]) {
+            item.addEventListener('click', () => {
+                showModal(infoTexts[infoType]);
+            });
+        }
+    });
+
+    // Дрожание фоток
     const images = document.querySelectorAll('.flower-img');
     let ticking = false;
     let lastScroll = window.scrollY;
@@ -552,6 +594,7 @@
         }
     });
 
+    // Навигация (главная/заказ/контакт)
     const navBtns = document.querySelectorAll('.nav-item');
     const homeSec = document.getElementById('home-section');
     const orderSec = document.getElementById('order-section');
@@ -600,31 +643,20 @@
     updateActive();
     setTimeout(shake, 200);
 
+    // Кнопка "помощь" (плавающая)
     const helpBtn = document.getElementById('helpButton');
     helpBtn.addEventListener('click', () => {
         helpBtn.style.animation = 'none';
         setTimeout(() => { helpBtn.style.animation = ''; }, 10);
-        alert('Свяжитесь с нами: +7 900 225-08-33');
+        showModal('📞 Свяжитесь с нами: <strong>+79022500833</strong><br>✈️ Telegram: <strong>@BeesFlowerss</strong>');
     });
 
+    // Кнопка "Каталог"
     const catalogBtn = document.getElementById('catalogBtn');
     catalogBtn.addEventListener('click', () => {
         window.location.href = 'order.html';
         catalogBtn.style.transform = 'scale(0.97)';
         setTimeout(() => { catalogBtn.style.transform = ''; }, 120);
-    });
-
-    // Модальное окно
-    const modal = document.getElementById('modal');
-    const closeModal = document.querySelector('.close-modal');
-    window.showModal = function() {
-        modal.style.display = 'flex';
-    }
-    closeModal.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) modal.style.display = 'none';
     });
 </script>
 </body>
